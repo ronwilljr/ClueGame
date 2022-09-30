@@ -1,0 +1,109 @@
+.mainDiv {
+  display: flex;
+  flex-direction: column;
+}
+.mainTopRow {
+  display: flex;
+  justify-content: space-between;
+  height: 700px;;
+}
+
+.whoseTurn {
+  border: 1px solid;
+  border-color: red; 
+  flex-grow: 2;
+  text-align: center;
+}
+.messages {
+  border: 1px solid;
+  border-color: blue;
+  flex-grow: 5;
+  text-align: center;
+}
+.playerCount {
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  flex-grow: 1;
+}
+.leftCol {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  border-color: purple;
+}
+.midCol {
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid;
+  border-color: purple;
+  justify-content: center;
+}
+.gbRow {
+  display: flex;
+  justify-content: space-evenly;
+  border: 1px solid;
+  border-color: purple;
+  height:50px;
+}
+.gbGrid {
+  border: 1px solid;
+  border-color: yellow;
+  flex-grow: 1;
+}
+.gbRoom {
+  border: 1px solid;
+  border-color: darkblue;
+  flex-grow: 1;
+}
+.gbHall {
+  border: 1px solid;
+  border-color: red;
+  flex-grow: 1;
+}
+
+.rightCol {
+  flex-grow: 1;
+  border: 1px solid;
+  border-color: purple;
+  display: flex;
+  flex-direction: column;
+}
+.myCharacter {
+  flex-grow:2;
+  text-align: center;
+  border: 1px solid;
+  border-color: purple;
+}
+.myWeapon {
+  flex-grow:2;
+  text-align: center;
+  border: 1px solid;
+  border-color: purple;
+}
+.myStatus {
+  flex-grow:1;
+  text-align: center;
+  border: 1px solid;
+  border-color: purple;
+}
+.crossedOut {
+  flex-grow:5;
+  text-align:center;
+  border: 1px solid;
+  border-color: purple;
+}
+.mainBotRow {
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid;
+  border-color: green;
+  height: 50px;
+  align-items: center;
+}
+.choices {
+  flex-grow: 1;
+  text-align: center;
+}
