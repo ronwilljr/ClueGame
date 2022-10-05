@@ -1,27 +1,17 @@
 import './App.css';
 
-
 function App() {
   return (
     <div className= 'mainDiv'>
-
       <div className= 'mainTopRow'>
 
         <div className= 'leftCol'>
-
           <div className= 'whoseTurn'>
-          <div>Player 2's Turn</div>
-          <img  src="/player1.png" alt="current player's turn"/>
+            <div>Player 2's Turn</div>
+            <img  src="/player1.png" alt="current player's turn"/>
           </div>
-
-          <div className='messages'>
-            Messages
-          </div>
-
-          <div className='playerCount'>
-            playerCount: 4
-          </div>
-
+          <div className='messages'>Messages</div>
+          <div className='playerCount'>playerCount: 4</div>
         </div>
 
         <div className='midCol'>
@@ -88,39 +78,24 @@ function App() {
             <div className='gbGrid'></div>
             <div className='gbGrid'></div>
           </div>
-
         </div>
 
         <div className='rightCol'>
-          <div className='myCharacter'>
-            You Are
-          </div>
-          <div className='myWeapon'>
-            Your Weapon
-          </div>
-          <div className='myStatus'>
-            current status
-          </div>
-          <div className='crossedOut'>
-            crossOut List
-          </div>
+          <div className='myCharacter'>You Are</div>
+          <div className='myWeapon'>Your Weapon</div>
+          <div className='myStatus'>current status</div>
+          <div className='crossedOut'>crossOut List</div>
         </div>
 
       </div>
 
       <div className= 'mainBotRow'>
-        <div className='choice1'>
-          choice 1
-        </div>
-        <div className='choice2'>
-          choice 2
-        </div>
-        <div className='choice3'>
-          choice 3
-        </div>
+        <div className='choice1'>choice 1</div>
+        <div className='choice2'>choice 2</div>
+        <div className='choice3'>choice 3</div>
       </div>
+
     </div>
   );
 }
-
 export default App;

@@ -7,68 +7,50 @@
   justify-content: space-between;
   height: 900px;
 }
-
+.leftCol {
+  width:15%;
+  display: flex;
+  flex-direction: column;
+}
 .whoseTurn {
   background-color: bisque;
   text-align: center;
   height: 20%;
-
 }
 .whoseTurn img{
   height: 50px;
   width: 50px;
 }
 .messages {
-  /* border: 1px solid;
-  border-color: blue; */
   height: 70%;
   text-align: center;
-  background-color: rosybrown;
-  
+  background-color: rosybrown; 
 }
 .playerCount {
   display:flex;
   justify-content:center;
   align-items: center;
-  /* border: 1px solid;
-  border-color: blue; */
   background-color: chartreuse;
   height: 10%
 }
-.leftCol {
-  /* flex-grow: 1; */
-  width:15%;
-  display: flex;
-  flex-direction: column;
-
-}
 .midCol {
-  /* flex-grow: 3; */
   width:70%;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid;
-  border-color: purple; */
   background-color: seashell;
   justify-content: center;
 }
 .gbInnerRows {
   display: flex;
   justify-content: center;
-  /* border: 1px solid;
-  border-color: purple; */
   height: 150px;
 }
 .gbOutterRows {
   display: flex;
   justify-content: center;
-  /* border: 1px solid;
-  border-color: purple; */
   height: 60px;
 }
 .gbGrid {
-  /* border: 1px solid;
-  border-color: yellow; */
   width: 150px;
 }
 .gbHHalls {
@@ -89,8 +71,7 @@
   height: 50px;
   margin-top: 10px;
   margin-left: 50px;
-  text-align: center;
-  
+  text-align: center; 
 }
 .gbPlayer2Start {
   background-color: orange;
@@ -98,8 +79,7 @@
   height: 50px;
   margin-top: 50px;
   margin-left: 100px;
-  text-align: center;
-  
+  text-align: center; 
 }
 .gbPlayer3Start {
   background-color: yellow;
@@ -169,22 +149,13 @@
   background-color: lightseagreen;
   width: 150px;
 }
-
-
 .rightCol {
   width:15%;
-  /* flex-grow: 1; */
-  /* border: 1px solid;
-  border-color: purple; */
   display: flex;
-  flex-direction: column;
-  
+  flex-direction: column; 
 }
 .myCharacter {
-  /* flex-grow:2; */
   text-align: center;
-  /* border: 1px solid;
-  border-color: purple; */
   height: 20%;
   background-color: darkgrey;
 }
@@ -201,7 +172,6 @@
 .crossedOut {
   flex-grow:5;
   text-align:center;
-
 }
 .mainBotRow {
   height: 50px;
@@ -210,17 +180,16 @@
 .choice1 {
   display:inline-block;
   text-align: center;
-  background-color: #dbc8ff;
+  background-color: #6350d1;
   border-right:  1px solid;
   border-color: white;
   height: 100%;
   width: 33%;
-
 }
 .choice2 {
   display: inline-block;
   text-align: center;
-  background-color: goldenrod;
+  background-color: #6350d1;
   border-right:  1px solid;
   border-color: white;
   height: 100%;
@@ -229,7 +198,7 @@
 .choice3 {
   display: inline-block;
   text-align: center;
-  background-color: goldenrod;
+  background-color: #6350d1;
   height: 100%;
   width: 33%;
 }
