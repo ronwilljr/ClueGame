@@ -1,5 +1,6 @@
 import './App.css';
 
+
 function App() {
   return (
     <div className= 'mainDiv'>
@@ -9,7 +10,8 @@ function App() {
         <div className= 'leftCol'>
 
           <div className= 'whoseTurn'>
-            Player 2's Turn
+          <div>Player 2's Turn</div>
+          <img  src="/player1.png" alt="current player's turn"/>
           </div>
 
           <div className='messages'>
@@ -23,81 +25,78 @@ function App() {
         </div>
 
         <div className='midCol'>
-          <div className='gbRow'>
-            <div className='gbGrid'>1</div>
-            <div className='gbGrid'>2</div>
-            <div className='gbGrid'>3</div>
-            <div className='gbGrid'>4</div>
-            <div className='gbGrid'>5</div>
-            <div className='gbGrid'>6</div>
-            <div className='gbGrid'>7</div>
+          <div className='gbOutterRows'>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'><div className='gbPlayer1Start'>player1</div></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'></div>
           </div>
-          <div className='gbRow'>
-            <div className='gbGrid'>1</div>
-            <div className='gbRoom'>2</div>
-            <div className='gbGrid'>3</div>
-            <div className='gbRoom'>4</div>
-            <div className='gbGrid'>5</div>
-            <div className='gbRoom'>6</div>
-            <div className='gbGrid'>7</div>
+          <div className='gbInnerRows'>
+            <div className='gbGrid'></div>
+            <div className='gbRoom1'>Study</div>
+            <div className='gbHHalls'></div>
+            <div className='gbRoom2'>Hall</div>
+            <div className='gbHHalls'></div>
+            <div className='gbRoom3'>Lounge</div>
+            <div className='gbGrid'></div>
           </div>
-          <div className='gbRow'>
-            <div className='gbGrid'>1</div>
-            <div className='gbHall'>2
-              <div className='gbHallIn'>
+          <div className='gbInnerRows'>
+            <div className='gbGrid'><div className='gbPlayer2Start'>player 2</div></div>
+            <div className='gbGrid'><div className='gbVHalls'></div></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'><div className='gbVHalls'></div></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'><div className='gbVHalls'></div></div>
+            <div className='gbGrid'><div className='gbPlayer3Start'>player 3</div></div>
+          </div>
+          <div className='gbInnerRows'>
+            <div className='gbGrid'></div>
+            <div className='gbRoom7'>Library</div>
+            <div className='gbHHalls'></div>
+            <div className='gbRoom8'>Billiard Room</div>
+            <div className='gbHHalls'></div>
+            <div className='gbRoom9'>Dining Room</div>
+            <div className='gbGrid'></div>
+          </div>
+          <div className='gbInnerRows'>
+            <div className='gbGrid'><div className='gbPlayer4Start'>player 4</div></div>
+            <div className='gbGrid'><div className='gbVHalls'></div></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'><div className='gbVHalls'></div></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'><div className='gbVHalls'></div></div>
+            <div className='gbGrid'></div>
+          </div>
+          <div className='gbInnerRows'>
+            <div className='gbGrid'></div>
+            <div className='gbRoom7'>Conservatory</div>
+            <div className='gbHHalls'></div>
+            <div className='gbRoom8'>Ballroom</div>
+            <div className='gbHHalls'></div>
+            <div className='gbRoom9'>Kitchen</div>
+            <div className='gbGrid'></div>
+          </div>
+          <div className='gbOutterRows'>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'><div className='gbPlayer5Start'>player 5</div></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'><div className='gbPlayer6Start'>player 6</div></div>
+            <div className='gbGrid'></div>
+            <div className='gbGrid'></div>
+          </div>
 
-              </div>
-            </div>
-            <div className='gbGrid'>3</div>
-            <div className='gbHall'>4</div>
-            <div className='gbGrid'>5</div>
-            <div className='gbHall'>6</div>
-            <div className='gbGrid'>7</div>
-          </div>
-          <div className='gbRow'>
-            <div className='gbGrid'>1</div>
-            <div className='gbRoom'>2</div>
-            <div className='gbGrid'>3</div>
-            <div className='gbRoom'>4</div>
-            <div className='gbGrid'>5</div>
-            <div className='gbRoom'>6</div>
-            <div className='gbGrid'>7</div>
-          </div>
-          <div className='gbRow'>
-            <div className='gbGrid'>1</div>
-            <div className='gbRoom'>2</div>
-            <div className='gbGrid'>3</div>
-            <div className='gbRoom'>4</div>
-            <div className='gbGrid'>5</div>
-            <div className='gbRoom'>6</div>
-            <div className='gbGrid'>7</div>
-          </div>
-          <div className='gbRow'>
-            <div className='gbGrid'>1</div>
-            <div className='gbRoom'>2</div>
-            <div className='gbGrid'>3</div>
-            <div className='gbRoom'>4</div>
-            <div className='gbGrid'>5</div>
-            <div className='gbRoom'>6</div>
-            <div className='gbGrid'>7</div>
-          </div>
-          <div className='gbRow'>
-            <div>1</div>
-            <div>2</div>
-            <div>3</div>
-            <div>4</div>
-            <div>5</div>
-            <div>6</div>
-            <div>7</div>
-          </div>
         </div>
 
         <div className='rightCol'>
           <div className='myCharacter'>
-            character symbol
+            You Are
           </div>
           <div className='myWeapon'>
-            weapon symbol
+            Your Weapon
           </div>
           <div className='myStatus'>
             current status
@@ -110,13 +109,13 @@ function App() {
       </div>
 
       <div className= 'mainBotRow'>
-        <div className='choices'>
+        <div className='choice1'>
           choice 1
         </div>
-        <div className='choices'>
+        <div className='choice2'>
           choice 2
         </div>
-        <div className='choices'>
+        <div className='choice3'>
           choice 3
         </div>
       </div>
