@@ -1,4 +1,5 @@
 import './App.css';
+import Messages from './messages';
 
 function App() {
   return (
@@ -12,10 +13,7 @@ function App() {
           </div>
           <div className='messages'>
             <div className='messagesTitle'>Messages</div>
-            <div className='messagesBox'>
-              <div>it is player 1's turn</div>
-              <div>player 2 moved to the kitchen</div>
-            </div>
+            <div className='messagesBox'><Messages/></div>
           </div>
           <div className='playerCount'>playerCount: 4</div>
         </div>
