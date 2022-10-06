@@ -23,8 +23,17 @@
 }
 .messages {
   height: 70%;
+}
+.messagesTitle {
   text-align: center;
-  background-color: rosybrown; 
+  background-color: #affdfd;
+  border-bottom: 1px dashed;
+  height: 5%; 
+  padding-top: 10px;
+}
+.messagesBox {
+  background-color: #affdfd;
+  height: 95%;
 }
 .playerCount {
   display:flex;

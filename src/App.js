@@ -10,7 +10,13 @@ function App() {
             <div>Player 2's Turn</div>
             <img  src="/player1.png" alt="current player's turn"/>
           </div>
-          <div className='messages'>Messages</div>
+          <div className='messages'>
+            <div className='messagesTitle'>Messages</div>
+            <div className='messagesBox'>
+              <div>it is player 1's turn</div>
+              <div>player 2 moved to the kitchen</div>
+            </div>
+          </div>
           <div className='playerCount'>playerCount: 4</div>
         </div>
 
