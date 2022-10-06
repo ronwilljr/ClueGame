@@ -18,8 +18,8 @@
   height: 20%;
 }
 .whoseTurn img{
-  height: 50px;
-  width: 50px;
+  height: 100px;
+  width: 100px;
 }
 .messages {
   height: 70%;
@@ -159,10 +159,18 @@
   height: 20%;
   background-color: darkgrey;
 }
+.myCharacter img{
+  height: 100px;
+  width: 100px;
+}
 .myWeapon {
   height: 20%;
   text-align: center;
   background-color: grey;
+}
+.myWeapon img{
+  height: 100px;
+  width: 100px;
 }
 .myStatus {
   height: 10%;
@@ -175,30 +183,29 @@
 }
 .mainBotRow {
   height: 50px;
-  align-items: center;
+  display: flex;
 }
 .choice1 {
-  display:inline-block;
-  text-align: center;
   background-color: #6350d1;
-  border-right:  1px solid;
+  border-right: 1px;
   border-color: white;
-  height: 100%;
   width: 33%;
+  text-align: center;
+  color: white
 }
 .choice2 {
-  display: inline-block;
-  text-align: center;
   background-color: #6350d1;
-  border-right:  1px solid;
+  border-right: 1px;
   border-color: white;
-  height: 100%;
-  width: 33%;
+  width: 34%;
+  text-align: center;
+  color: white
 }
 .choice3 {
-  display: inline-block;
-  text-align: center;
   background-color: #6350d1;
-  height: 100%;
   width: 33%;
+  text-align: center;
+  border-color: white;
+  color: white
 }
+

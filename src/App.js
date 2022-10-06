@@ -81,8 +81,14 @@ function App() {
         </div>
 
         <div className='rightCol'>
-          <div className='myCharacter'>You Are</div>
-          <div className='myWeapon'>Your Weapon</div>
+          <div className='myCharacter'>
+            <div>You are</div>
+            <img  src="/player2.jpg" alt="user's character"/>
+          </div>
+          <div className='myWeapon'>
+            <div>Your weapon</div>
+            <img  src="/weapon1.jpg" alt="user's weapon"/>
+          </div>
           <div className='myStatus'>current status</div>
           <div className='crossedOut'>crossOut List</div>
         </div>
@@ -90,9 +96,9 @@ function App() {
       </div>
 
       <div className= 'mainBotRow'>
-        <div className='choice1'>choice 1</div>
-        <div className='choice2'>choice 2</div>
-        <div className='choice3'>choice 3</div>
+        <button className='choice1'>choice 1</button>
+        <button className='choice2'>choice 2</button>
+        <button className='choice3'>choice 3</button>
       </div>
 
     </div>
