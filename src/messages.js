@@ -21,7 +21,12 @@ function Messages() {
             <button onClick={loadMessages}>Load Message</button>
             <div>
                 {messages.map((message) => {
-                    return <div key={message.key}>-{message.activity}</div>
+                    return (
+                        <div>
+                    <div key={message.key}>-{message.activity}</div>
+                    <br></br>
+                    </div>
+                    )
                 })}
             </div>    
         </div>

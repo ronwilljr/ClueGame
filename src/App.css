@@ -218,4 +218,20 @@
   border-color: white;
   color: white
 }
+.flex-col {
+  display: flex;
+  flex-direction:column;
+}
+.flex-row {
+  display: flex;
+}
+.flex-center {
+  justify-content: center;
+}
+.ml-10 {
+  margin-left: 10px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
 

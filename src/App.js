@@ -90,11 +90,44 @@ function App() {
             <img  src="/player2.jpg" alt="user's character"/>
           </div>
           <div className='myWeapon'>
-            <div>Your weapon</div>
+            <div >Your weapon</div>
             <img  src="/weapon1.jpg" alt="user's weapon"/>
           </div>
           <div className='myStatus'>current status</div>
-          <div className='crossedOut'>crossOut List</div>
+          <div className='crossedOut'>
+            <div className='flex-row flex-center'>
+              <div className='flex-col'>
+                <div>Characters</div>
+                <div>charact1</div>
+                <div>charact2</div>
+                <div>charact3</div>
+                <div>charact4</div>
+                <div>charact5</div>
+                <div>charact6</div>
+              </div>
+              <div className='flex-col ml-10 mr-10'>
+                <div>Weapons</div>
+                <div>weapon1</div>
+                <div>weapon2</div>
+                <div>weapon3</div>
+                <div>weapon4</div>
+                <div>weapon5</div>
+                <div>weapon6</div>
+              </div>
+              <div className='flex-col'>
+                <div>Locations</div>
+                <div>Study</div>
+                <div>Hall</div>
+                <div>Lounge</div>
+                <div>Library</div>
+                <div>Billiard Room</div>
+                <div>Dining Room</div>
+                <div>Conservatory</div>
+                <div>Ballroom</div>
+                <div>Kitchen</div>
+              </div>
+            </div>
+          </div>
         </div>
 
       </div>
