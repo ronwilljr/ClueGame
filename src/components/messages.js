@@ -6,7 +6,6 @@ function Messages() {
             .then((response) => response.json())
             .then((data) => {
                 setMessages([data, ...messages]);
-                console.log(data)
         });
     }
 
@@ -22,9 +21,9 @@ function Messages() {
             <div>
                 {messages.map((message) => {
                     return (
-                        <div>
-                    <div key={message.key}>-{message.activity}</div>
-                    <br></br>
+                        <div key={message.key}>
+                            <div >-{message.activity}</div>
+                            <br></br>
                     </div>
                     )
                 })}

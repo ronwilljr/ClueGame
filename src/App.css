@@ -173,25 +173,7 @@
   height: 100px;
   width: 100px;
 }
-.myWeapon {
-  height: 20%;
-  text-align: center;
-  background-color: grey;
-}
-.myWeapon img{
-  height: 100px;
-  width: 100px;
-}
-.myStatus {
-  height: 10%;
-  text-align: center;
-  background-color: goldenrod;
-}
-.crossedOut {
-  flex-grow:5;
-  text-align:center;
-}
-.mainBotRow {
+.yourChoicesBox {
   height: 50px;
   display: flex;
 }
@@ -233,5 +215,17 @@
 }
 .mr-10 {
   margin-right: 10px;
+}
+.myCardsTitle {
+  background-color: aquamarine;
+  margin-bottom: 10px;
+}
+.myCardsIndividual {
+  background-color: aquamarine;
+  margin-bottom: 10px;
+}
+.myCards {
+  background-color: aqua;
+  height: 80%;
 }
 
