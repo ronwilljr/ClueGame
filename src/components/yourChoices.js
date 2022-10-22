@@ -1,5 +1,4 @@
 
-
 function YourChoices() {
     return (
         <div className="yourChoicesBox">

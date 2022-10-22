@@ -1,11 +1,8 @@
 
-
 function MyCards() {
 
     const cards = [{"cardName":"knife", "key":1},{"cardName":"watson", "key":2}]
     
-
-
     return (
         <div>
         {cards.map((card) => {
