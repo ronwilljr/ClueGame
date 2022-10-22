@@ -13,9 +13,12 @@
   flex-direction: column;
 }
 .whoseTurn {
-  background-color: bisque;
   text-align: center;
   height: 20%;
+  background-color: #ffffff;
+  border-top: 3px solid #00b8b8;
+  border-left: 3px solid #00b8b8;
+  border-right: 3px solid #00b8b8;
 }
 .whoseTurn img{
   height: 100px;
@@ -35,7 +38,7 @@
   margin-bottom: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #00b8b8;
+  border-bottom: 3px solid #00b8b8;
 }
 .messagesBox {
   background-color: aqua;
@@ -189,7 +192,10 @@
 .myCharacter {
   text-align: center;
   height: 20%;
-  background-color: darkgrey;
+  background-color: #ffffff;
+  border-top: 3px solid #00b8b8;
+  border-left: 3px solid #00b8b8;
+  border-right: 3px solid #00b8b8;
 }
 .myCharacter img{
   height: 100px;
@@ -242,7 +248,7 @@
   margin-bottom: 10px;
   padding-top: 20px;
   padding-bottom: 20px;
-  border-bottom: 2px solid #00b8b8;
+  border-bottom: 3px solid #00b8b8;
 }
 .myCardsIndividual {
   background-color: aquamarine;
