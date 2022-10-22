@@ -22,9 +22,8 @@ function Messages() {
                 {messages.map((message) => {
                     return (
                         <div key={message.key}>
-                            <div >-{message.activity}</div>
-                            <br></br>
-                    </div>
+                            <div className="messagesIndividual" >{message.activity}</div>            
+                        </div>
                     )
                 })}
             </div>    

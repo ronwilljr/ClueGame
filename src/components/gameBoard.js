@@ -158,7 +158,7 @@ function GameBoard() {
           <div className='gbInnerRows'>
             <div className='gbGrid'></div>
             <div className='gbRoom1'>
-              <div>Study</div>
+              <div className="gbRoomTitle">Study</div>
               <div>
                 {Study.map((studylist) => {
                   return (
@@ -180,7 +180,7 @@ function GameBoard() {
               </div>
             </div>
             <div className='gbRoom2'>
-              <div>Hall</div>
+              <div className="gbRoomTitle">Hall</div>
                 <div>
                   {Hall.map((halllist) => {
                     return (
@@ -201,7 +201,7 @@ function GameBoard() {
               </div>
             </div>
             <div className='gbRoom3'>
-              <div>Lounge</div>
+              <div className="gbRoomTitle">Lounge</div>
                 <div>
                   {Lounge.map((loungelist) => {
                     return (
@@ -280,7 +280,7 @@ function GameBoard() {
           <div className='gbInnerRows'>
             <div className='gbGrid'></div>
             <div className='gbRoom7'>
-              <div>Library</div>
+              <div className="gbRoomTitle">Library</div>
                 <div>
                   {Library.map((librarylist) => {
                     return (
@@ -301,7 +301,7 @@ function GameBoard() {
                 </div>
             </div>
             <div className='gbRoom8'>
-              <div>Billiard</div>
+              <div className="gbRoomTitle">Billiard</div>
                 <div>
                   {Billiard.map((billiardlist) => {
                     return (
@@ -322,7 +322,7 @@ function GameBoard() {
                 </div>
             </div>
             <div className='gbRoom9'>
-              <div>Dining</div>
+              <div className="gbRoomTitle">Dining</div>
                 <div>
                   {Dining.map((dininglist) => {
                     return (
@@ -390,7 +390,7 @@ function GameBoard() {
           <div className='gbInnerRows'>
             <div className='gbGrid'></div>
             <div className='gbRoom7'>
-              <div>Conservatory</div>
+              <div className="gbRoomTitle">Conservatory</div>
                 <div>
                   {Conservatory.map((conservatorylist) => {
                     return (
@@ -411,7 +411,7 @@ function GameBoard() {
               </div>
             </div>
             <div className='gbRoom8'>
-              <div>Ballroom</div>
+              <div className="gbRoomTitle">Ballroom</div>
                 <div>
                   {Ballroom.map((ballroomlist) => {
                     return (
@@ -432,7 +432,7 @@ function GameBoard() {
               </div>
             </div>
             <div className='gbRoom9'>
-              <div>Kitchen</div>
+              <div className="gbRoomTitle">Kitchen</div>
                 <div>
                   {Kitchen.map((kitchenlist) => {
                     return (
