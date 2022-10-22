@@ -218,14 +218,25 @@
 }
 .myCardsTitle {
   background-color: aquamarine;
+  text-align: center;
+  font-weight: 700;
   margin-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #00b8b8;
 }
 .myCardsIndividual {
   background-color: aquamarine;
+  text-align: center;
   margin-bottom: 10px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  border-top: 2px solid #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 .myCards {
   background-color: aqua;
   height: 80%;
+  border: 3px solid #00b8b8;
 }
 
