@@ -5,10 +5,49 @@ import MyCards from './components/myCards';
 import WhoseTurn from './components/whoseTurn';
 import YourAre from './components/youAre';
 import YourChoices from './components/yourChoices';
+import {useState} from 'react';
+
+
 
 function App() {
-  console.log('hello')
 
+  
+  const [username, setUsername] = useState('');
+  const [usernameStatus, setUsernameStatus] = useState(false);
+
+  const handleChange = event => {
+    setUsername(event.target.value);
+  };
+
+  const handleClick = () => {
+    if (username.length !== 0) {
+    setUsernameStatus(true);
+    }
+  };
+
+  if (usernameStatus === false) {
+    return (
+    <div className='loginScreen'>
+      <div className='loginTitle'>
+        Welcome To ClueLess
+      </div>
+      <div className='loginSubtext'>
+        Enter A Username
+      </div>
+      <input
+        type = "text"
+        id = "username"
+        name = "username"
+        onChange = {handleChange}
+        value = {username}
+      />
+      <div></div>
+      <button className = "loginButton" onClick={handleClick}>Enter Game</button>
+    </div>
+    )
+  }
+  console.log("Username:",username)
+  console.log("Username Status:",usernameStatus)
 
   return (
     <div className= 'mainDiv'>

@@ -99,7 +99,7 @@
   height: 50px;
   margin-top: 10px;
   margin-left: 50px;
-  text-align: center; 
+  text-align: center;
 }
 .gbPlayer2Start {
   background-color: orange;
@@ -266,4 +266,17 @@
   border-left: 3px solid #00b8b8;
   border-right: 3px solid #00b8b8;
 }
-
+.loginScreen {
+  text-align: center;
+}
+.loginTitle {
+  font-size: 40px;
+  margin-top: 50px;
+}
+.loginSubtext {
+  font-size: 20px;
+  margin-top: 40px;
+}
+.loginButton {
+  margin-top: 25px;
+}

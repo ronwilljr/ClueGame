@@ -10,10 +10,10 @@ function GameBoard() {
                       {"user":"hall8", "location":"hall_8","key":6},
                       {"user":"hall9", "location":"hall_9","key":7},
                       {"user":"hall12", "location":"hall_12","key":8},
-                      {"user":"play1", "location":"player_1","key":8},
-                      {"user":"play2", "location":"player_2","key":8},
+                      {"user":"jenny", "location":"player_1","key":8},
+                      {"user":"mike", "location":"player_2","key":8},
                       {"user":"play6", "location":"player_6","key":8},
-                      {"user":"her", "location":"ballroom","key":9}]
+                      {"user":"steve", "location":"ballroom","key":9}]
 
   const Study = []
   const Hall = []
@@ -132,7 +132,7 @@ function GameBoard() {
     return idCount += 1 
   })
 
-  console.log(Study,Hall)
+  console.log("Player Positions:", inputData)
     return (
         <div>
           <div className='gbOutterRows'>
