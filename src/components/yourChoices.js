@@ -1,23 +1,38 @@
+import Select from "react-select";
 
 function YourChoices() {
 
-    const Choices = [["Move"],["Suggest"],["Accuse"] ]
+    const options1 = [
+        {value: "library", label: "Library"},
+        {value: "ballroom", label: "Ballroom"}
+    ]
+    const options2 = [
+        {
+            label: "Weapons",
+            options: [
+        {value: "knife", label: "Knife"},
+        {value: "sword", label: "Sword"}
+            ]
+        },{
+            label: "Persons",
+            options: [
+        {value: "anna", label: "Anna"}
+            ]
+        }]
+    const options3 = [
+        {value: "pan", label: "Pan"},
+        {value: "dining", label: "Dining"}
+    ]
 
-    const handleClick1 = () => {
-        console.log("Move was selected")
+    const handleChange = (selectedOption) => {
+        console.log(selectedOption)
     };
-    const handleClick2 = () => {
-        console.log("Suggest was selected")
-    };
-    const handleClick3 = () => {
-        console.log("Accuse was selected")
-    }; 
 
     return (
         <div className="yourChoicesBox">
-            <button className='choice1' onClick={handleClick1}>{Choices[0]}</button>
-            <button className='choice2' onClick={handleClick2}>{Choices[1]}</button>
-            <button className='choice3' onClick={handleClick3}>{Choices[2]}</button>
+            <Select className="choice1" options = {options1} onChange = {handleChange} placeholder = "Move" menuPlacement = "top" isMulti/>
+            <Select className="choice2" options = {options2} onChange = {handleChange} placeholder = "Suggest" menuPlacement = "top" isMulti/>
+            <Select className="choice3" options = {options3} onChange = {handleChange} placeholder = "Accuse" menuPlacement = "top" isMulti/>
         </div> 
     )   
 }
