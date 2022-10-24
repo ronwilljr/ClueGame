@@ -3,6 +3,7 @@ import { useState } from "react";
 
 function YourChoices() {
 
+    const playerTurn = true
     const weaponOptions = ["Knife", "Lead Pipe", "Wrench", "Rope", "Revolver", "Candlestick"]
     const peopleOptions = ["Mrs. White", "Mrs. Peacock", "Miss Scarlet", "Col. Mustard", "Mr Green", "Prof. Plum"]
     const locationOptions = ["Study","Hall","Lounge","Library","Billiard","Dining","Conervatory","Ballroom","Kitchen"]
@@ -82,6 +83,7 @@ function YourChoices() {
     const [selection2, setSelection2] = useState([]);
     const [selection3, setSelection3] = useState([]);
     const [outResult, setOutResult] = useState([]);
+    const [submitted, setSubmitted] = useState([false]);
 
 
     const handleChange1 = (selectedOption) => {
@@ -168,11 +170,22 @@ function YourChoices() {
                 setOutResult([tempValues])
             }
         }
+        setSubmitted(true)
     }
     if (outResult.length !== 0) {console.log(outResult)}
     
+    if (submitted === true || playerTurn === false) {
+        return (
+            <div className="yourChoicesBox">
+            <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
+            <Select className="choice2" isDisabled = {true}  placeholder = "Suggest" menuPlacement = "top" />
+            <Select className="choice3" isDisabled = {true}  placeholder = "Accuse" menuPlacement = "top" />
+            <button className="submitChoice" disabled = {true} >Submit</button>
+        </div> 
+        )
+    }
 
-    return (
+    else return (
         <div className="yourChoicesBox">
             <Select className="choice1" isDisabled = {disabled1} options = {options1} onChange = {handleChange1} placeholder = "Move" menuPlacement = "top" isMulti/>
             <Select className="choice2" isDisabled = {disabled2} options = {options2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
