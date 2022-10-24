@@ -205,24 +205,22 @@
   display: flex;
 }
 .choice1 {
-  background-color: aqua;
-  border-right: 1px;
-  border-color: #00b8b8;
-  width: 33%;
+  width: 30%;
   text-align: center;
+  margin-right: 10px;
 }
 .choice2 {
-  background-color: aqua;
-  border-right: 1px;
-  border-color: #00b8b8;
-  width: 34%;
+  width: 30%;
   text-align: center;
+  margin-right: 10px;
 }
 .choice3 {
-  background-color: aqua;
-  width: 33%;
+  width: 30%;
   text-align: center;
-  border-color: #00b8b8;
+  margin-right: 30px;
+}
+.submitChoice {
+  width: 100px;
 }
 .flex-col {
   display: flex;
