@@ -10,58 +10,44 @@ function YourChoices() {
 
     const options1 = [
         {value: "library", label: "Library"},
-        {value: "ballroom", label: "Ballroom"}
-    ]
+        {value: "ballroom", label: "Ballroom"}]
 
     const options2 = [
-        {
-            label: "Weapons",
-            options: [
-        {value: weaponOptions[0], label: weaponOptions[0]},
-        {value: weaponOptions[1], label: weaponOptions[1]},
-        {value: weaponOptions[2], label: weaponOptions[2]},
-        {value: weaponOptions[3], label: weaponOptions[3]},
-        {value: weaponOptions[4], label: weaponOptions[4]},
-        {value: weaponOptions[5], label: weaponOptions[5]}
-            ]
-        },
-        {
-            label: "People",
-            options: [
-        {value: peopleOptions[0], label: peopleOptions[0]},
-        {value: peopleOptions[1], label: peopleOptions[1]},
-        {value: peopleOptions[2], label: peopleOptions[2]},
-        {value: peopleOptions[3], label: peopleOptions[3]},
-        {value: peopleOptions[4], label: peopleOptions[4]},
-        {value: peopleOptions[5], label: peopleOptions[5]}
-            ]
-        }]
-
-    const options3 = [
-        {
-            label: "Weapons",
+        {label: "Weapons",
             options: [
                 {value: weaponOptions[0], label: weaponOptions[0]},
                 {value: weaponOptions[1], label: weaponOptions[1]},
                 {value: weaponOptions[2], label: weaponOptions[2]},
                 {value: weaponOptions[3], label: weaponOptions[3]},
                 {value: weaponOptions[4], label: weaponOptions[4]},
-                {value: weaponOptions[5], label: weaponOptions[5]}
-            ]
-        },
-        {
-            label: "People",
+                {value: weaponOptions[5], label: weaponOptions[5]}]},
+        {label: "People",
             options: [
                 {value: peopleOptions[0], label: peopleOptions[0]},
                 {value: peopleOptions[1], label: peopleOptions[1]},
                 {value: peopleOptions[2], label: peopleOptions[2]},
                 {value: peopleOptions[3], label: peopleOptions[3]},
                 {value: peopleOptions[4], label: peopleOptions[4]},
-                {value: peopleOptions[5], label: peopleOptions[5]}
-            ]
-        },
-        {
-            label: "Locations",
+                {value: peopleOptions[5], label: peopleOptions[5]}]}]
+
+    const options3 = [
+        {label: "Weapons",
+            options: [
+                {value: weaponOptions[0], label: weaponOptions[0]},
+                {value: weaponOptions[1], label: weaponOptions[1]},
+                {value: weaponOptions[2], label: weaponOptions[2]},
+                {value: weaponOptions[3], label: weaponOptions[3]},
+                {value: weaponOptions[4], label: weaponOptions[4]},
+                {value: weaponOptions[5], label: weaponOptions[5]}]},
+        {label: "People",
+            options: [
+                {value: peopleOptions[0], label: peopleOptions[0]},
+                {value: peopleOptions[1], label: peopleOptions[1]},
+                {value: peopleOptions[2], label: peopleOptions[2]},
+                {value: peopleOptions[3], label: peopleOptions[3]},
+                {value: peopleOptions[4], label: peopleOptions[4]},
+                {value: peopleOptions[5], label: peopleOptions[5]}]},
+        {label: "Locations",
             options: [
                 {value: locationOptions[0], label: locationOptions[0]},
                 {value: locationOptions[1], label: locationOptions[1]},
@@ -71,10 +57,8 @@ function YourChoices() {
                 {value: locationOptions[5], label: locationOptions[5]},
                 {value: locationOptions[6], label: locationOptions[6]},
                 {value: locationOptions[7], label: locationOptions[7]},
-                {value: locationOptions[8], label: locationOptions[8]}
-            ]
-        }
-    ]
+                {value: locationOptions[8], label: locationOptions[8]}]}]
+
     const [disabled1, setDisabled1] = useState(false);
     const [disabled2, setDisabled2] = useState(false);
     const [disabled3, setDisabled3] = useState(false);
@@ -86,16 +70,9 @@ function YourChoices() {
     const [submitted, setSubmitted] = useState([false]);
 
 
-    const handleChange1 = (selectedOption) => {
-        setSelection1(selectedOption)
-        
-    };
-    const handleChange2 = (selectedOption) => {
-        setSelection2(selectedOption)
-    };
-    const handleChange3 = (selectedOption) => {
-        setSelection3(selectedOption)
-    };
+    const handleChange1 = (selectedOption) => {setSelection1(selectedOption)};
+    const handleChange2 = (selectedOption) => {setSelection2(selectedOption)};
+    const handleChange3 = (selectedOption) => {setSelection3(selectedOption)};
 
     if (selection1.length === 0 & selection2.length === 0 & selection3.length === 0 & disabled4 === false) {setDisabled4(true)}
 
@@ -106,13 +83,8 @@ function YourChoices() {
     if (selection2.length === 2) {
         let x = 0
         for (let i in selection2) {
-
-            if (weaponOptions.includes(selection2[i].value)) {
-                x += 3
-            }
-            if (peopleOptions.includes(selection2[i].value)) {
-                x += 5
-            }
+            if (weaponOptions.includes(selection2[i].value)) {x += 3}
+            if (peopleOptions.includes(selection2[i].value)) {x += 5}
         }
         if (x === 8 & disabled4 === true) {setDisabled4(false)}
     }
@@ -121,41 +93,19 @@ function YourChoices() {
     if (selection3.length === 3) {
         let x = 0
         for (let i in selection3) {
-
-            if (weaponOptions.includes(selection3[i].value)) {
-                x += 3
-            }
-            if (peopleOptions.includes(selection3[i].value)) {
-                x += 5
-            }
-            if (locationOptions.includes(selection3[i].value)) {
-                x += 10
-            }
+            if (weaponOptions.includes(selection3[i].value)) {x += 3}
+            if (peopleOptions.includes(selection3[i].value)) {x += 5}
+            if (locationOptions.includes(selection3[i].value)) {x += 10}
         }
         if (x === 18 & disabled4 === true) {setDisabled4(false)}
     }
 
-    if (disabled1 === false & (selection2.length !== 0 || selection3.length !== 0)) {
-        setDisabled1(true)
-    }
-    if (disabled2 === false & (selection1.length !== 0 || selection3.length !== 0)) {
-        setDisabled2(true)
-    }
-    if (disabled3 === false & (selection1.length !== 0 || selection2.length !== 0)) {
-        setDisabled3(true)
-    }
-
-    if (disabled1 === true & (selection2.length === 0 & selection3.length === 0)) {
-        setDisabled1(false)
-    }
-    if (disabled2 === true & (selection1.length === 0 & selection3.length === 0)) {
-        setDisabled2(false)
-    }
-    if (disabled3 === true & (selection1.length === 0 & selection2.length === 0)) {
-        setDisabled3(false)
-    }
-
-    
+    if (disabled1 === false & (selection2.length !== 0 || selection3.length !== 0)) {setDisabled1(true)}
+    if (disabled2 === false & (selection1.length !== 0 || selection3.length !== 0)) {setDisabled2(true)}
+    if (disabled3 === false & (selection1.length !== 0 || selection2.length !== 0)) {setDisabled3(true)}
+    if (disabled1 === true & (selection2.length === 0 & selection3.length === 0)) {setDisabled1(false)}
+    if (disabled2 === true & (selection1.length === 0 & selection3.length === 0)) {setDisabled2(false)}
+    if (disabled3 === true & (selection1.length === 0 & selection2.length === 0)) {setDisabled3(false)}
 
     const handleClick = () => {
         const selectionGroup = [selection1, selection2, selection3]
@@ -164,9 +114,7 @@ function YourChoices() {
             if (selectionGroup[selection].length !== 0) {
                 var temp = selectionGroup[selection]
                 var tempValues = []
-                for (let iteration in temp) {
-                    tempValues.push(temp[iteration].value)                    
-                } 
+                for (let iteration in temp) {tempValues.push(temp[iteration].value)} 
                 setOutResult([tempValues])
             }
         }
