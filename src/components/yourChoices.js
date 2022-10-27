@@ -5,12 +5,13 @@ function YourChoices() {
 
     const playerTurn = true
     const weaponOptions = ["Knife", "Lead Pipe", "Wrench", "Rope", "Revolver", "Candlestick"]
-    const peopleOptions = ["Mrs. White", "Mrs. Peacock", "Miss Scarlet", "Col. Mustard", "Mr Green", "Prof. Plum"]
+    const peopleOptions = ["Mrs. White", "Mrs. Peacock", "Miss Scarlet", "Col. Mustard", "Mr. Green", "Prof. Plum"]
     const locationOptions = ["Study","Hall","Lounge","Library","Billiard","Dining","Conervatory","Ballroom","Kitchen"]
 
     const options1 = [
-        {value: "library", label: "Library"},
-        {value: "ballroom", label: "Ballroom"}]
+        {value: "#9", label: "#9"},
+        {value: "#11", label: "#11"},
+        {value: "#12", label: "#12"}]
 
     const options2 = [
         {label: "Weapons",
@@ -115,12 +116,14 @@ function YourChoices() {
                 var temp = selectionGroup[selection]
                 var tempValues = []
                 for (let iteration in temp) {tempValues.push(temp[iteration].value)} 
-                setOutResult([tempValues])
+                setOutResult(tempValues)
             }
         }
         setSubmitted(true)
     }
-    if (outResult.length !== 0) {console.log(outResult)}
+    if (outResult.length === 1) {console.log("To Server: (Move)",outResult)}
+    if (outResult.length === 2) {console.log("To Server: (Suggest)",outResult)}
+    if (outResult.length === 3) {console.log("To Server: (Accuse)",outResult)}
     
     if (submitted === true || playerTurn === false) {
         return (

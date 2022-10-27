@@ -2,18 +2,13 @@
 
 function GameBoard() {
 
-  const inputData = [{"user":"bob", "location":"study", "key":1},
-                      {"user":"watson", "location":"hall_1","key":2},
-                      {"user":"hall3", "location":"hall_3","key":3},
-                      {"user":"hall5", "location":"hall_5","key":4},
-                      {"user":"hall7", "location":"hall_7","key":5},
-                      {"user":"hall8", "location":"hall_8","key":6},
-                      {"user":"hall9", "location":"hall_9","key":7},
-                      {"user":"hall12", "location":"hall_12","key":8},
-                      {"user":"jenny", "location":"player_1","key":8},
-                      {"user":"mike", "location":"player_2","key":8},
-                      {"user":"play6", "location":"player_6","key":8},
-                      {"user":"steve", "location":"ballroom","key":9}]
+  const inputData = [{"user":"Mr. Green", "location":"study", "key":1},
+                      {"user":"Col. Mustard", "location":"hall_1","key":2},
+                      {"user":"Miss Scarlet", "location":"ballroom","key":3},
+                      {"user":"Mrs. White", "location":"hall_5","key":4},
+                      {"user":"Mrs. Peacock", "location":"hall_7","key":5},
+                      {"user":"Prof. Plum", "location":"hall_8","key":6},
+]
 
   const Study = []
   const Hall = []
@@ -132,7 +127,7 @@ function GameBoard() {
     return idCount += 1 
   })
 
-  console.log("Player Positions:", inputData)
+  console.log("From Server: (Player Positions)", inputData)
     return (
         <div>
           <div className='gbOutterRows'>
@@ -170,7 +165,7 @@ function GameBoard() {
               
             </div>
             <div className='gbHHalls'>
-              <div>
+              <div>#1
                 {Hall_1.map((hall_1list) => {
                   return (
                     <div key={hall_1list.key}>
@@ -191,7 +186,7 @@ function GameBoard() {
                 </div>
             </div>
             <div className='gbHHalls'>
-              <div>
+              <div>#2
                 {Hall_2.map((hall_2list) => {
                   return (
                     <div key={hall_2list.key}>
@@ -228,7 +223,7 @@ function GameBoard() {
             </div>
             <div className='gbGrid'>
               <div className='gbVHalls'>
-                <div>
+                <div>#3
                   {Hall_3.map((hall_3list) => {
                     return (
                       <div key={hall_3list.key}>
@@ -241,7 +236,7 @@ function GameBoard() {
             <div className='gbGrid'></div>
             <div className='gbGrid'>
               <div className='gbVHalls'>
-                <div>
+                <div>#4
                   {Hall_4.map((hall_4list) => {
                     return (
                       <div key={hall_4list.key}>
@@ -254,7 +249,7 @@ function GameBoard() {
             <div className='gbGrid'></div>
             <div className='gbGrid'>
               <div className='gbVHalls'>
-                <div>
+                <div>#5
                   {Hall_5.map((hall_5list) => {
                     return (
                       <div key={hall_5list.key}>
@@ -291,7 +286,7 @@ function GameBoard() {
                 </div>
             </div>
             <div className='gbHHalls'>
-              <div>
+              <div>#6
                 {Hall_6.map((hall_6list) => {
                   return (
                     <div key={hall_6list.key}>
@@ -312,7 +307,7 @@ function GameBoard() {
                 </div>
             </div>
             <div className='gbHHalls'>
-              <div>
+              <div>#7
                   {Hall_7.map((hall_7list) => {
                     return (
                       <div key={hall_7list.key}>
@@ -349,7 +344,7 @@ function GameBoard() {
             </div>
             <div className='gbGrid'>
               <div className='gbVHalls'>
-                <div>
+                <div>#8
                   {Hall_8.map((hall_8list) => {
                     return (
                       <div key={hall_8list.key}>
@@ -362,7 +357,7 @@ function GameBoard() {
             <div className='gbGrid'></div>
             <div className='gbGrid'>
               <div className='gbVHalls'>
-                <div>
+                <div>#9
                   {Hall_9.map((hall_9list) => {
                     return (
                       <div key={hall_9list.key}>
@@ -375,7 +370,7 @@ function GameBoard() {
             <div className='gbGrid'></div>
             <div className='gbGrid'>
               <div className='gbVHalls'>
-                <div>
+                <div>#10
                   {Hall_10.map((hall_10list) => {
                     return (
                       <div key={hall_10list.key}>
@@ -401,7 +396,7 @@ function GameBoard() {
                 </div>
             </div>
             <div className='gbHHalls'>
-              <div>
+              <div>#11
                 {Hall_11.map((hall_11list) => {
                   return (
                     <div key={hall_11list.key}>
@@ -422,7 +417,7 @@ function GameBoard() {
                 </div>
             </div>
             <div className='gbHHalls'>
-              <div>
+              <div>#12
                 {Hall_12.map((hall_12list) => {
                   return (
                     <div key={hall_12list.key}>

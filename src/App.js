@@ -47,7 +47,6 @@ function App() {
     )
   }
   console.log("Username:",username)
-  console.log("Username Status:",usernameStatus)
 
   return (
     <div className= 'mainDiv'>

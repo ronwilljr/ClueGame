@@ -1,7 +1,7 @@
 
 function MyCards() {
 
-    const cards = [{"cardName":"knife", "key":1},{"cardName":"watson", "key":2}]
+    const cards = [{"cardName":"Knife", "key":1},{"cardName":"Prof. Plum", "key":2}]
     
     return (
         <div>
