@@ -7,13 +7,19 @@ import YourAre from './components/youAre';
 import YourChoices from './components/yourChoices';
 import {useState} from 'react';
 
-
+// function getUsername(username){
+//   return username
+// }
 
 function App() {
-
   
   const [username, setUsername] = useState('');
   const [usernameStatus, setUsernameStatus] = useState(false);
+
+  App.username = {  'userID': 'userIDexample', 
+                    'username': username, 
+                    'character': 'CharacterExample'}
+
 
   const handleChange = event => {
     setUsername(event.target.value);
@@ -47,6 +53,8 @@ function App() {
     )
   }
   console.log("Username:",username)
+  // var userID = getUsername(username)
+  // console.log(userID)
 
   return (
     <div className= 'mainDiv'>
@@ -78,5 +86,6 @@ function App() {
 
     </div>
   );
+  
 }
 export default App;

@@ -1,12 +1,15 @@
 import Select from "react-select";
 import { useState } from "react";
+import App from "../App";
+
 
 function YourChoices() {
 
     const playerTurn = true
     const weaponOptions = ["Knife", "Lead Pipe", "Wrench", "Rope", "Revolver", "Candlestick"]
     const peopleOptions = ["Mrs. White", "Mrs. Peacock", "Miss Scarlet", "Col. Mustard", "Mr. Green", "Prof. Plum"]
-    const locationOptions = ["Study","Hall","Lounge","Library","Billiard","Dining","Conervatory","Ballroom","Kitchen"]
+    const locationOptions = ["Study","Hall","Lounge","Library","Billiard","Dining","Conervatory","Ballroom","Kitchen",
+                             "#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12"]
 
     const options1 = [
         {value: "#9", label: "#9"},
@@ -67,7 +70,6 @@ function YourChoices() {
     const [selection1, setSelection1] = useState([]);
     const [selection2, setSelection2] = useState([]);
     const [selection3, setSelection3] = useState([]);
-    const [outResult, setOutResult] = useState([]);
     const [submitted, setSubmitted] = useState([false]);
 
 
@@ -110,21 +112,57 @@ function YourChoices() {
 
     const handleClick = () => {
         const selectionGroup = [selection1, selection2, selection3]
-
         for (let selection in selectionGroup) {
             if (selectionGroup[selection].length !== 0) {
                 var temp = selectionGroup[selection]
                 var tempValues = []
-                for (let iteration in temp) {tempValues.push(temp[iteration].value)} 
-                setOutResult(tempValues)
+                for (let iteration in temp){
+                    let identifier = ''
+                        
+                    if (locationOptions.includes(temp[iteration].value)) {identifier = 1}
+                    if (peopleOptions.includes(temp[iteration].value)) {identifier = 2}
+                    if (weaponOptions.includes(temp[iteration].value)) {identifier = 3}
+                    
+                    tempValues.push([identifier,temp[iteration].value]) 
+                }
+                tempValues.sort()
             }
         }
         setSubmitted(true)
-    }
-    if (outResult.length === 1) {console.log("To Server: (Move)",outResult)}
-    if (outResult.length === 2) {console.log("To Server: (Suggest)",outResult)}
-    if (outResult.length === 3) {console.log("To Server: (Accuse)",outResult)}
+
+        var Decision = ''
+        var Location = ''
+        var Weapon = ''
+        var Person = ''
+
+        if (tempValues.length === 1) {
+            Location = tempValues[0][1] 
+            Decision = 'Move' 
+        }
     
+        if (tempValues.length === 2) {
+            Person = tempValues[0][1]
+            Weapon = tempValues[1][1] 
+            Decision = 'Suggest'  
+        }
+    
+        if (tempValues.length === 3) {
+            Location = tempValues[0][1]
+            Person = tempValues[1][1]
+            Weapon = tempValues[2][1] 
+            Decision = 'Accuse'
+        }
+      
+        var toJson = {
+            'credentials': App.username,
+            'Decision': Decision,
+            'Location': Location,
+            'Weapon': Weapon,
+            'Person': Person
+        }
+        console.log(toJson)
+    }
+
     if (submitted === true || playerTurn === false) {
         return (
             <div className="yourChoicesBox">
