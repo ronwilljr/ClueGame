@@ -3,9 +3,10 @@ import GameBoard from './components/gameBoard';
 import Messages from './components/messages';
 import MyCards from './components/myCards';
 import WhoseTurn from './components/whoseTurn';
-import YourAre from './components/youAre';
+import YouAre from './components/youAre';
 import YourChoices from './components/yourChoices';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import { url } from './URL';
 
 // function getUsername(username){
 //   return username
@@ -15,24 +16,153 @@ function App() {
   
   const [username, setUsername] = useState('');
   const [usernameStatus, setUsernameStatus] = useState(false);
+  const [joinRoom, setJoinRoom] = useState(false);
+  const [startGame, setStartGame] = useState(false);
+  const [detailsAPIData, setDetailsAPIData] = useState([]);
+  const [disabled1, setDisabled1] = useState(false);
+  const [isAdmin, setisAdmin] = useState(false);
+  const [userID, setUserID] = useState('');
+  const [gameStartedData, setGameStartedData] = useState([]);
+
+
 
   App.username = {  'userID': 'userIDexample', 
                     'username': username, 
                     'character': 'CharacterExample'}
 
 
-  const handleChange = event => {
-    setUsername(event.target.value);
-  };
+  // const handleChange = event => {
+  //   setUsername(event.target.value);
+  // };
 
-  const handleClick = () => {
-    if (username.length !== 0) {
-    setUsernameStatus(true);
+  // const handleClick = () => {
+  //   if (username.length !== 0) {
+  //   setUsernameStatus(true);
+  //   }
+  // };
+
+  // if (usernameStatus === false) {
+  //   return (
+  //   <div className='loginScreen'>
+  //     <div className='loginTitle'>
+  //       Welcome To ClueLess
+  //     </div>
+  //     <div className='loginSubtext'>
+  //       Enter A Username
+  //     </div>
+  //     <input
+  //       type = "text"
+  //       id = "username"
+  //       name = "username"
+  //       onChange = {handleChange}
+  //       value = {username}
+  //     />
+  //     <div></div>
+  //     <button className = "loginButton" onClick={handleClick}>Enter Game</button>
+  //   </div>
+  //   )
+  // }
+
+  function makeID() {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < 8; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
+    setUserID(result);
+}
+  App.myUserID = userID
+
+  function callJoinAPI() {
+    if (userID !== '') {
+    const joinAPI = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: ''
+    };
+      fetch(url + '/join?id=' + userID , joinAPI)
+      .then(response => response.json())
+      .then(data => console.log('joinAPI:',data));
+  }}
+
+  useEffect(() => {
+    callJoinAPI()
+  }, [userID])
+  
+  useEffect(() => {
+      const interval = setInterval( () => {
+            if (disabled1 === true) {
+            callDetailsAPI();
+            let adminData = detailsAPIData.players
+            for (let i in adminData) {
+              if (adminData[i].id === userID & adminData[i].admin === true) {
+                setisAdmin(true)
+              }
+            }
+
+      }}, 3000 );
+        return () => clearInterval(interval);
+    }, [detailsAPIData])
+    
+  
+
+  function callDetailsAPI() {
+    fetch(url + '/details')
+        .then((response) => response.json())
+        .then((data) => {
+          setDetailsAPIData(data)
+    });
+}
+
+function callStartAPI() {
+  fetch(url + '/start')
+      .then((response) => response.json())
+      .then((data) => { console.log(data)
+  });
+}
+
+function checkIfGameStart() {
+  fetch(url + "/game")
+      .then((response) => response.json())
+      .then((data) => {
+        setGameStartedData(data)
+  });
+}
+
+useEffect(() => {
+  const interval = setInterval( () => {
+    if(joinRoom === true){
+    checkIfGameStart();
+    }
+  }, 3000 );
+  return () => clearInterval(interval);
+}, [gameStartedData, joinRoom])
+
+
+if (gameStartedData.length > 0) {
+  if (gameStartedData[0].active === true & startGame === false) {
+    setStartGame(true)
+  }
+}
+
+  const handleJoin = () => {
+    setJoinRoom(true);
+    makeID()
+    callJoinAPI()
+    callDetailsAPI()
+    setDisabled1(true)
   };
 
-  if (usernameStatus === false) {
-    return (
+  const handleStart = () => {
+    // setStartGame(true)
+    callStartAPI()
+  };
+
+
+
+  if (startGame === false) {
+  return (
     <div className='loginScreen'>
       <div className='loginTitle'>
         Welcome To ClueLess
@@ -40,21 +170,13 @@ function App() {
       <div className='loginSubtext'>
         Enter A Username
       </div>
-      <input
-        type = "text"
-        id = "username"
-        name = "username"
-        onChange = {handleChange}
-        value = {username}
-      />
+
       <div></div>
-      <button className = "loginButton" onClick={handleClick}>Enter Game</button>
+      <button className = "loginButton" disabled = {disabled1} onClick={handleJoin}>Enter Room</button>
+      <button className = "loginButton" disabled = {!isAdmin} onClick={handleStart}>Start Game</button>
     </div>
     )
   }
-  console.log("Username:",username)
-  // var userID = getUsername(username)
-  // console.log(userID)
 
   return (
     <div className= 'mainDiv'>
@@ -73,7 +195,7 @@ function App() {
         <div className='midCol'><GameBoard/></div>
 
         <div className='rightCol'>
-          <div className='myCharacter'><YourAre/></div>
+          <div className='myCharacter'><YouAre/></div>
           <div className='myCards'>
             <div className='myCardsTitle'>My Cards</div>
             <div className='myCardsHolder'><MyCards/></div>

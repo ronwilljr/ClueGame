@@ -221,6 +221,10 @@
 }
 .submitChoice {
   width: 100px;
+  margin-right: 30px;
+}
+.endTurn {
+  width: 100px;
 }
 .flex-col {
   display: flex;

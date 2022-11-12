@@ -1,14 +1,62 @@
-
+import { url } from '../URL';
+import {useState, useEffect} from 'react';
+import App from '../App';
 
 function GameBoard() {
 
-  const inputData = [{"user":"Mr. Green", "location":"study", "key":1},
-                      {"user":"Col. Mustard", "location":"hall_1","key":2},
-                      {"user":"Miss Scarlet", "location":"ballroom","key":3},
-                      {"user":"Mrs. White", "location":"hall_5","key":4},
-                      {"user":"Mrs. Peacock", "location":"hall_7","key":5},
-                      {"user":"Prof. Plum", "location":"hall_8","key":6},
-]
+
+  const [boardData, setBoardData] = useState([]);
+  GameBoard.sendBoardData = boardData
+
+  function loadBoardData() {
+      fetch(url + "/game")
+          .then((response) => response.json())
+          .then((data) => {
+            setBoardData([data]);
+      });
+  }
+
+  useEffect(() => {
+      const interval = setInterval( () => {
+        loadBoardData();
+      }, 3000 );
+      return () => clearInterval(interval);
+  }, [boardData])
+
+  if (boardData.length !== 0) {
+    var user1 = boardData[0][0].currentPlayer.name
+    var user2 = boardData[0][0].otherPlayers[0].name 
+    var user3 = boardData[0][0].otherPlayers[1].name 
+    var user4 = boardData[0][0].otherPlayers[2].name 
+    var user5 = boardData[0][0].otherPlayers[3].name 
+    var user6 = boardData[0][0].otherPlayers[4].name
+
+    var user1Loc = boardData[0][0].currentPlayer.location.codename
+    var user2Loc = boardData[0][0].otherPlayers[0].location.codename 
+    var user3Loc = boardData[0][0].otherPlayers[1].location.codename 
+    var user4Loc = boardData[0][0].otherPlayers[2].location.codename 
+    var user5Loc = boardData[0][0].otherPlayers[3].location.codename 
+    var user6Loc = boardData[0][0].otherPlayers[4].location.codename 
+    }
+
+
+  var inputData = [{"user": user1, "location": user1Loc, "key":1},
+  {"user": user2, "location": user2Loc, "key":2},
+  {"user": user3, "location": user3Loc, "key":3},
+  {"user": user4, "location": user4Loc, "key":4},
+  {"user": user5, "location": user5Loc, "key":5},
+  {"user": user6, "location": user6Loc, "key":6}]
+
+  // console.log(inputData)
+
+
+//   const inputData = [{"user":"Mr. Green", "location":"study", "key":1},
+//                       {"user":"Col. Mustard", "location":"hall_1","key":2},
+//                       {"user":"Miss Scarlet", "location":"ballroom","key":3},
+//                       {"user":"Mrs. White", "location":"hall_5","key":4},
+//                       {"user":"Mrs. Peacock", "location":"hall_7","key":5},
+//                       {"user":"Prof. Plum", "location":"hall_8","key":6},
+// ]
 
   const Study = []
   const Hall = []
@@ -70,64 +118,63 @@ function GameBoard() {
     if (entry.location === "kitchen") {
       Kitchen.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_1") {
+    if (entry.location === "hwy1") {
       Hall_1.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_2") {
+    if (entry.location === "hwy2") {
       Hall_2.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_3") {
+    if (entry.location === "hwy3") {
       Hall_3.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_4") {
+    if (entry.location === "hwy4") {
       Hall_4.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_5") {
+    if (entry.location === "hwy5") {
       Hall_5.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_6") {
+    if (entry.location === "hwy6") {
       Hall_6.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_7") {
+    if (entry.location === "hwy7") {
       Hall_7.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_8") {
+    if (entry.location === "hwy8") {
       Hall_8.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_9") {
+    if (entry.location === "hwy9") {
       Hall_9.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_10") {
+    if (entry.location === "hwy10") {
       Hall_10.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_11") {
+    if (entry.location === "hwy11") {
       Hall_11.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "hall_12") {
+    if (entry.location === "hwy12") {
       Hall_12.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "player_1") {
+    if (entry.location === "scarlet") {
       Player_1.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "player_2") {
+    if (entry.location === "plum") {
       Player_2.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "player_3") {
+    if (entry.location === "mustard") {
       Player_3.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "player_4") {
+    if (entry.location === "peacock") {
       Player_4.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "player_5") {
+    if (entry.location === "green") {
       Player_5.push({"user": entry.user, "key": idCount})
     }
-    if (entry.location === "player_6") {
+    if (entry.location === "white") {
       Player_6.push({"user": entry.user, "key": idCount})
     }
     return idCount += 1 
   })
 
-  console.log("From Server: (Player Positions)", inputData)
     return (
         <div>
           <div className='gbOutterRows'>

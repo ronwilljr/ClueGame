@@ -1,6 +1,9 @@
 import {useEffect, useState } from "react";
 
 function Messages() {
+
+    const [messages, setMessages] = useState([]);
+ 
     function loadMessages() {
         fetch("https://www.boredapi.com/api/activity")
             .then((response) => response.json())
@@ -9,15 +12,16 @@ function Messages() {
         });
     }
 
-    const [messages, setMessages] = useState([]);
+    // useEffect(() => {
+    //     const interval = setInterval( () => {
+    //         loadMessages();
+    //     }, 3000 );
+    //     return () => clearInterval(interval);
+    // }, [messages])
 
-    useEffect(() => {
-        loadMessages();
-    }, [])
 
     return (
         <div>
-            <button onClick={loadMessages}>Load Message</button>
             <div>
                 {messages.map((message) => {
                     return (

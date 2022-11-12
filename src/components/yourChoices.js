@@ -1,12 +1,25 @@
 import Select from "react-select";
 import { useState } from "react";
 import App from "../App";
+import YouAre from "./youAre";
+import WhoseTurn from "./whoseTurn";
+import GameBoard from "./gameBoard";
+import { url } from "../URL";
 
 
 function YourChoices() {
 
-    const playerTurn = true
-    const turnType = 'objecting'
+
+    const [playerTurn, setPlayerTurn] = useState(true)
+
+    if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
+        if (WhoseTurn.whoseTurn !== YouAre.iAM & playerTurn === true) {
+            setPlayerTurn(false)
+        }
+    }
+            
+
+    const turnType = ''
     const weaponOptions = ["Knife", "Lead Pipe", "Wrench", "Rope", "Revolver", "Candlestick"]
     const peopleOptions = ["Mrs. White", "Mrs. Peacock", "Miss Scarlet", "Col. Mustard", "Mr. Green", "Prof. Plum"]
     const locationOptions = ["Study","Hall","Lounge","Library","Billiard","Dining","Conervatory","Ballroom","Kitchen",
@@ -40,7 +53,9 @@ function YourChoices() {
 
 
     const [disabled4, setDisabled4] = useState(true);
-    const [submitted, setSubmitted] = useState([false]);
+    const [disabled5, setDisabled5] = useState(true);
+    const [submitted, setSubmitted] = useState(false);
+    const [endOfTurn, setEndOfTurn] = useState(false);
 
 
     const [altSelection1, setAltSelection1] = useState([]);
@@ -70,7 +85,6 @@ function YourChoices() {
     if (altOptions.weapons.length === 0 & altDisabled1 === false) {setAltDisabled1(true)}
     if (altOptions.locations.length === 0 & altDisabled2 === false) {setAltDisabled2(true)}
     if (altOptions.people.length === 0 & altDisabled3 === false) {setAltDisabled3(true)}
-
 
 
 
@@ -184,6 +198,7 @@ function YourChoices() {
                     console.log(altGroup[alt][0].value)
                 }
             }
+            setSubmitted(true)
 
         }
         else {
@@ -214,12 +229,18 @@ function YourChoices() {
             if (tempValues.length === 1) {
                 Location = tempValues[0][1] 
                 Decision = 'Move' 
+
+                console.log('the decision', YouAre.iAM ,Location)
+                callMoveAPI(YouAre.iAM, Location)
             }
         
             if (tempValues.length === 2) {
                 Person = tempValues[0][1]
                 Weapon = tempValues[1][1] 
                 Decision = 'Suggest'  
+
+                console.log('Suuggesting')
+                callSuggestAPI(Person, Weapon)
             }
         
             if (tempValues.length === 3) {
@@ -227,29 +248,79 @@ function YourChoices() {
                 Person = tempValues[1][1]
                 Weapon = tempValues[2][1] 
                 Decision = 'Accuse'
+
+                console.log('Accusing')
+                callAccuseAPI(Person, Weapon, Location)
             }
-        
-            var toJson = {
-                'credentials': App.username,
-                'Decision': Decision,
-                'Location': Location,
-                'Weapon': Weapon,
-                'Person': Person
-            }
-            console.log(toJson)
+         
         }
     }
 
-    if (submitted === true || playerTurn === false) {
+
+    function callMoveAPI(user, location) {
+        const moveAPI = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: ''
+        };
+        fetch(url + '/move?user=' + user + '&location=' + location , moveAPI)
+        .then(response => response.json())
+        .then(data => console.log('moveAPI response data:',data));
+    }
+
+    function callSuggestAPI(culprit, weapon) {
+        const suggestAPI = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: ''
+        };
+        fetch(url + '/suggest?culprit=' + culprit + '&weapon=' + weapon , suggestAPI)
+        .then(response => response.json())
+        .then(data => console.log('suggestAPI response data:',data));
+    }
+
+    function callAccuseAPI(culprit, weapon, location) {
+        const accuseAPI = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: ''
+        };
+        fetch(url + '/accuse?culprit=' + culprit + '&weapon=' + weapon + '&location=' + location , accuseAPI)
+        .then(response => response.json())
+        .then(data => console.log('accuseAPI response data:',data));
+    }
+
+    if (submitted === true & disabled5 === true) {setDisabled5(false)}
+    const handleEnd = () => {
+        setEndOfTurn(true)
+        console.log('end of turn')
+    }
+
+    if (playerTurn === false || endOfTurn === true) {
         return (
             <div className="yourChoicesBox">
             <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
             <Select className="choice2" isDisabled = {true}  placeholder = "Suggest" menuPlacement = "top" />
             <Select className="choice3" isDisabled = {true}  placeholder = "Accuse" menuPlacement = "top" />
             <button className="submitChoice" disabled = {true} >Submit</button>
+            <button className="endTurn" onClick={handleEnd} disabled = {true}>End Turn</button>
         </div> 
         )
     }
+
+    else if (submitted === true & endOfTurn !== true) {
+        return (
+            <div className="yourChoicesBox">
+            <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
+            <Select className="choice2" isDisabled = {true}  placeholder = "Suggest" menuPlacement = "top" />
+            <Select className="choice3" isDisabled = {true}  placeholder = "Accuse" menuPlacement = "top" />
+            <button className="submitChoice" disabled = {true} >Submit</button>
+            <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
+        </div> 
+        )
+    }
+
+
 
     else if (turnType === 'objecting') {
         return (
@@ -258,6 +329,7 @@ function YourChoices() {
                 <Select className="choice2" isDisabled = {altDisabled2} options = {altOptions2()} onChange = {handleAltChange2} placeholder = "Locations" menuPlacement = "top" isMulti/>
                 <Select className="choice3" isDisabled = {altDisabled3} options = {altOptions3()} onChange = {handleAltChange3} placeholder = "People" menuPlacement = "top" isMulti/>
                 <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
+                <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
             </div> 
         ) 
     }
@@ -268,6 +340,7 @@ function YourChoices() {
             <Select className="choice2" isDisabled = {disabled2} options = {options2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
             <Select className="choice3" isDisabled = {disabled3} options = {options3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
             <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
+            <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
         </div> 
     )   
 }
