@@ -1,5 +1,5 @@
 import Select from "react-select";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import App from "../App";
 import YouAre from "./youAre";
 import WhoseTurn from "./whoseTurn";
@@ -10,22 +10,81 @@ import { url } from "../URL";
 function YourChoices() {
 
 
-    const [playerTurn, setPlayerTurn] = useState(true)
+    const [playerTurn, setPlayerTurn] = useState(false)
+    const [disabled4, setDisabled4] = useState(true);
+    const [disabled5, setDisabled5] = useState(true);
+    const [submitted, setSubmitted] = useState(false);
+    const [endOfTurn, setEndOfTurn] = useState(false);
+    const [moveOptions, setMoveOptions] = useState([]);
+    const [moveAPIResponse, setMoveAPIResponse] = useState([]);
+    const [suggestAPIResponse, setSuggestAPIResponse] = useState([]);
+    const [accuseAPIResponse, setAccuseAPIResponse] = useState([]);
+    const [moveAPIFlag, setMoveAPIFlag] = useState(false);
+    const [suggestAPIFlag, setSuggestAPIFlag] = useState(false);
+    const [accuseAPIFlag, setAccuseAPIFlag] = useState(false);
+    const [chosenLocation, setChosenLocation] = useState('');
+    const [chosenPerson, setChosenPerson] = useState('');
+    const [chosenWeapon, setChosenWeapon] = useState('');
+    const [moveAPIResponseFlag, setMoveAPIResponseFlag] = useState(false);
+    const [suggestAPIResponseFlag, setSuggestAPIResponseFlag] = useState(false);
+    const [accuseAPIResponseFlag, setAccuseAPIResponseFlag] = useState(false);
+    const [gameIsOver, setGameIsOver] = useState(false);
+    const [bottomMessage, setBottomMessage] = useState('');
+    const [isSuggestDisabled, setIsSuggestDisabled] = useState(false);
+
+    const turnType = ''
+    const weaponOptions = ["Knife", "Lead Pipe", "Wrench", "Rope", "Revolver", "Candle Stick"]
+    const peopleOptions = ["Mrs. White", "Mrs. Peacock", "Miss Scarlet", "Col. Mustard", "Mr. Green", "Prof. Plum"]
+    const locationOptions = ["Study","Hall","Lounge","Library","Billiard","Dining","Conervatory","Ballroom","Kitchen",
+                             "hwy1", "hwy2", "hwy3", "hwy4", "hwy5", "hwy6", "hwy7", "hwy8", "hwy9", "hwy10", "hwy11", "hwy12"]
+    const altOptions = {weapons: [], locations: ['walmart'], people: ['Mrs.White']}
+    const hallways = ["hwy1", "hwy2", "hwy3", "hwy4", "hwy5", "hwy6", "hwy7", "hwy8", "hwy9", "hwy10", "hwy11", "hwy12",
+                        "scarlet", "plum", "peacock", "white", "green", "mustard"]
+
+
+    const [selection1, setSelection1] = useState([]);
+    const [selection2, setSelection2] = useState([]);
+    const [selection3, setSelection3] = useState([]);
+    const [disabled1, setDisabled1] = useState(false);
+    const [disabled2, setDisabled2] = useState(false);
+    const [disabled3, setDisabled3] = useState(false);
+    const handleChange1 = (selectedOption) => {setSelection1(selectedOption)};
+    const handleChange2 = (selectedOption) => {setSelection2(selectedOption)};
+    const handleChange3 = (selectedOption) => {setSelection3(selectedOption)};
+
+
+    if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
+        if (GameBoard.sendBoardData[0][0].active === false & gameIsOver === false) {
+            setGameIsOver(true)
+            setBottomMessage('Game Over! ' + WhoseTurn.whoseTurn + ' Won!')
+        }
+    }
 
     if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
         if (WhoseTurn.whoseTurn !== YouAre.iAM & playerTurn === true) {
             setPlayerTurn(false)
         }
     }
-            
 
-    const turnType = ''
-    const weaponOptions = ["Knife", "Lead Pipe", "Wrench", "Rope", "Revolver", "Candlestick"]
-    const peopleOptions = ["Mrs. White", "Mrs. Peacock", "Miss Scarlet", "Col. Mustard", "Mr. Green", "Prof. Plum"]
-    const locationOptions = ["Study","Hall","Lounge","Library","Billiard","Dining","Conervatory","Ballroom","Kitchen",
-                             "#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10", "#11", "#12"]
-    const altOptions = {weapons: [], locations: ['walmart'], people: ['Mrs.White']}
+    if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
+        if (WhoseTurn.whoseTurn === YouAre.iAM & playerTurn === false) {
+            setPlayerTurn(true)
+            setEndOfTurn(false)
+            setSubmitted(false)
+            setIsSuggestDisabled(false)
+            setMoveOptions(GameBoard.sendBoardData[0][0].moveOptions)
 
+            if (hallways.includes(GameBoard.sendBoardData[0][0].currentPlayer.location.codename) & isSuggestDisabled === false) {
+                setIsSuggestDisabled(true)
+            }
+        }
+    }
+
+
+    var usableOptions = []
+    for (let i in moveOptions) {
+        usableOptions.push({value: moveOptions[i], label: moveOptions[i]})
+    }
 
     const altOptions1 = () => {
         let alt1 = []
@@ -52,10 +111,7 @@ function YourChoices() {
     }
 
 
-    const [disabled4, setDisabled4] = useState(true);
-    const [disabled5, setDisabled5] = useState(true);
-    const [submitted, setSubmitted] = useState(false);
-    const [endOfTurn, setEndOfTurn] = useState(false);
+
 
 
     const [altSelection1, setAltSelection1] = useState([]);
@@ -88,10 +144,17 @@ function YourChoices() {
 
 
 
+    // const options1 = () => {
+    //     let locOpt = []
+    //     for (let i in locationOptions) {
+    //         locOpt.push({value: locationOptions[i], label: locationOptions[i]})
+    //     }
+    //     return locOpt
+    // }
     const options1 = () => {
         let locOpt = []
-        for (let i in locationOptions) {
-            locOpt.push({value: locationOptions[i], label: locationOptions[i]})
+        for (let i in moveOptions) {
+            locOpt.push({value: moveOptions[i], label: moveOptions[i]})
         }
         return locOpt
     }
@@ -146,15 +209,7 @@ function YourChoices() {
 
 
 
-    const [selection1, setSelection1] = useState([]);
-    const [selection2, setSelection2] = useState([]);
-    const [selection3, setSelection3] = useState([]);
-    const [disabled1, setDisabled1] = useState(false);
-    const [disabled2, setDisabled2] = useState(false);
-    const [disabled3, setDisabled3] = useState(false);
-    const handleChange1 = (selectedOption) => {setSelection1(selectedOption)};
-    const handleChange2 = (selectedOption) => {setSelection2(selectedOption)};
-    const handleChange3 = (selectedOption) => {setSelection3(selectedOption)};
+
 
     if (selection1.length === 0 & selection2.length === 0 & selection3.length === 0 & disabled4 === false & turnType !== 'objecting') {setDisabled4(true)}
 
@@ -219,7 +274,7 @@ function YourChoices() {
                     tempValues.sort()
                 }
             }
-            setSubmitted(true)
+            
 
             var Decision = ''
             var Location = ''
@@ -229,100 +284,186 @@ function YourChoices() {
             if (tempValues.length === 1) {
                 Location = tempValues[0][1] 
                 Decision = 'Move' 
-
-                console.log('the decision', YouAre.iAM ,Location)
-                callMoveAPI(YouAre.iAM, Location)
+                setChosenLocation(Location)
+                callMoveAPIFlag()
             }
         
             if (tempValues.length === 2) {
+    
                 Person = tempValues[0][1]
                 Weapon = tempValues[1][1] 
                 Decision = 'Suggest'  
+                setChosenPerson(Person)
+                setChosenWeapon(Weapon)
+                callSuggestAPIFlag()
 
-                console.log('Suuggesting')
-                callSuggestAPI(Person, Weapon)
+                // console.log('Suuggesting')
+                // callSuggestAPI(Person, Weapon)
             }
         
             if (tempValues.length === 3) {
+                
                 Location = tempValues[0][1]
                 Person = tempValues[1][1]
                 Weapon = tempValues[2][1] 
                 Decision = 'Accuse'
+                setChosenPerson(Person)
+                setChosenWeapon(Weapon)
+                setChosenLocation(Location)
+                callAccuseAPIFlag()
 
-                console.log('Accusing')
-                callAccuseAPI(Person, Weapon, Location)
+                // setSubmitted(true)
+                // console.log('Accusing')
+                // callAccuseAPI(Person, Weapon, Location)
             }
          
         }
     }
 
-
-    function callMoveAPI(user, location) {
-        const moveAPI = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: ''
-        };
-        fetch(url + '/move?user=' + user + '&location=' + location , moveAPI)
-        .then(response => response.json())
-        .then(data => console.log('moveAPI response data:',data));
+    function callMoveAPIFlag() {
+        setMoveAPIFlag(true)
+    }
+    function callSuggestAPIFlag() {
+        setSuggestAPIFlag(true)
+    }
+    function callAccuseAPIFlag() {
+        setAccuseAPIFlag(true)
     }
 
-    function callSuggestAPI(culprit, weapon) {
-        const suggestAPI = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: ''
-        };
-        fetch(url + '/suggest?culprit=' + culprit + '&weapon=' + weapon , suggestAPI)
-        .then(response => response.json())
-        .then(data => console.log('suggestAPI response data:',data));
-    }
 
-    function callAccuseAPI(culprit, weapon, location) {
-        const accuseAPI = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: ''
-        };
-        fetch(url + '/accuse?culprit=' + culprit + '&weapon=' + weapon + '&location=' + location , accuseAPI)
-        .then(response => response.json())
-        .then(data => console.log('accuseAPI response data:',data));
-    }
+    useEffect(() => {
+        if (moveAPIFlag === true) {
+            const moveAPI = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: ''
+            };
+            fetch(url + '/move?user=' + YouAre.iAM + '&location=' + chosenLocation , moveAPI)
+            .then(response => response.json())
+            .then(data => {   
+                setMoveAPIResponse(data);
+            }) 
+            setMoveAPIFlag(false)
+            setSelection1([])
+            setMoveAPIResponseFlag(true)
+
+        }
+    }, [chosenLocation, moveAPIFlag, moveAPIResponse])
+    useEffect(() => {
+        if (moveAPIResponseFlag === true) {
+            let res = ''
+            if (moveAPIResponse.message === 'success') {
+                setSubmitted(true)
+                
+            }
+            res = moveAPIResponse.reason
+            console.log('moveapiresonse:',res)
+            setMoveAPIResponseFlag(false)
+        }
+
+    }, [moveAPIResponse])
+
+
+    useEffect(() => {
+        if (suggestAPIFlag === true) {
+            const suggestAPI = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: ''
+            };
+            fetch(url + '/suggest?culprit=' + chosenPerson + '&weapon=' + chosenWeapon , suggestAPI)
+            .then(response => response.json())
+            .then(data => {   
+                setSuggestAPIResponse(data);
+            }) 
+            setSuggestAPIFlag(false)
+            setSelection2([])
+            setSuggestAPIResponseFlag(true)
+
+        }
+    }, [chosenPerson, chosenWeapon, suggestAPIFlag, suggestAPIResponse])
+    useEffect(() => {
+        if (suggestAPIResponseFlag === true) {
+            setSubmitted(true)
+            console.log('suggestapiresonse:',suggestAPIResponse)
+            setSuggestAPIResponseFlag(false)
+        }
+
+    }, [suggestAPIResponse])
+
+
+    useEffect(() => {
+        if (accuseAPIFlag === true) {
+            const accuseAPI = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: ''
+            };
+            fetch(url + '/accuse?culprit=' + chosenPerson + '&weapon=' + chosenWeapon + '&location=' + chosenLocation , accuseAPI)
+            .then(response => response.json())
+            .then(data => {   
+                setAccuseAPIResponse(data);
+            }) 
+            setAccuseAPIFlag(false)
+            setSelection3([])
+            setAccuseAPIResponseFlag(true)
+
+        }
+    }, [chosenPerson, chosenWeapon, chosenLocation, accuseAPIFlag, accuseAPIResponse])
+    useEffect(() => {
+        if (accuseAPIResponseFlag === true) {
+            setSubmitted(true)
+            console.log('accuseapiresonse:',accuseAPIResponse)
+            setAccuseAPIResponseFlag(false)
+        }
+
+    }, [accuseAPIResponse, bottomMessage])
+
 
     if (submitted === true & disabled5 === true) {setDisabled5(false)}
+
     const handleEnd = () => {
         setEndOfTurn(true)
         console.log('end of turn')
+        endTurnAPI()
     }
 
-    if (playerTurn === false || endOfTurn === true) {
+    function endTurnAPI() {
+        fetch(url + '/endturn')
+            .then((response) => response.json());
+    }
+
+    if (playerTurn === false || endOfTurn === true || gameIsOver === true) {
         return (
-            <div className="yourChoicesBox">
-            <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
-            <Select className="choice2" isDisabled = {true}  placeholder = "Suggest" menuPlacement = "top" />
-            <Select className="choice3" isDisabled = {true}  placeholder = "Accuse" menuPlacement = "top" />
-            <button className="submitChoice" disabled = {true} >Submit</button>
-            <button className="endTurn" onClick={handleEnd} disabled = {true}>End Turn</button>
-        </div> 
+            <div>
+                <div className="yourChoicesBox">
+                    <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
+                    <Select className="choice2" isDisabled = {true}  placeholder = "Suggest" menuPlacement = "top" />
+                    <Select className="choice3" isDisabled = {true}  placeholder = "Accuse" menuPlacement = "top" />
+                    <button className="submitChoice" disabled = {true} >Submit</button>
+                    <button className="endTurn" onClick={handleEnd} disabled = {true}>End Turn</button>
+                </div>
+                <div>{bottomMessage}</div> 
+            </div>
         )
     }
 
-    else if (submitted === true & endOfTurn !== true) {
+    else if (submitted === true & endOfTurn !== true ) {
+        console.log("this second")
         return (
             <div className="yourChoicesBox">
             <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
             <Select className="choice2" isDisabled = {true}  placeholder = "Suggest" menuPlacement = "top" />
-            <Select className="choice3" isDisabled = {true}  placeholder = "Accuse" menuPlacement = "top" />
-            <button className="submitChoice" disabled = {true} >Submit</button>
+            <Select className="choice3" isDisabled = {false} options = {options3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
+            <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
             <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
         </div> 
         )
     }
 
 
-
     else if (turnType === 'objecting') {
+        console.log("this third")
         return (
             <div className="yourChoicesBox">
                 <Select className="choice1" isDisabled = {altDisabled1} options = {altOptions1()} onChange = {handleAltChange1} placeholder = "Weapon" menuPlacement = "top" isMulti/>
@@ -334,14 +475,32 @@ function YourChoices() {
         ) 
     }
 
-    else return (
+    else if (isSuggestDisabled === true){
+
+        return (
+        
         <div className="yourChoicesBox">
-            <Select className="choice1" isDisabled = {disabled1} options = {options1()} onChange = {handleChange1} placeholder = "Move" menuPlacement = "top" isMulti/>
-            <Select className="choice2" isDisabled = {disabled2} options = {options2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
-            <Select className="choice3" isDisabled = {disabled3} options = {options3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
+            <Select className="choice1" isDisabled = {disabled1} options = {options1()} value = {selection1} onChange = {handleChange1} placeholder = "Move" menuPlacement = "top" isMulti/>
+            <Select className="choice2" isDisabled = {true} options = {options2} value = {selection2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
+            <Select className="choice3" isDisabled = {disabled3} options = {options3} value = {selection3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
             <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
             <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
         </div> 
-    )   
+    ) 
+    } 
+
+    else {
+        console.log('last one')
+        return (
+        
+        <div className="yourChoicesBox">
+            <Select className="choice1" isDisabled = {disabled1} options = {options1()} value = {selection1} onChange = {handleChange1} placeholder = "Move" menuPlacement = "top" isMulti/>
+            <Select className="choice2" isDisabled = {disabled2} options = {options2} value = {selection2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
+            <Select className="choice3" isDisabled = {disabled3} options = {options3} value = {selection3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
+            <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
+            <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
+        </div> 
+    ) 
+    }  
 }
 export default YourChoices;

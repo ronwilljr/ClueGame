@@ -1,4 +1,5 @@
 import {useEffect, useState } from "react";
+import { url } from "../URL";
 
 function Messages() {
 
@@ -12,12 +13,20 @@ function Messages() {
         });
     }
 
-    // useEffect(() => {
-    //     const interval = setInterval( () => {
-    //         loadMessages();
-    //     }, 3000 );
-    //     return () => clearInterval(interval);
-    // }, [messages])
+
+    function callChatAPI() {
+        fetch(url + '/chat')
+            .then((response) => response.json())
+            .then((data) => {
+        });
+      }
+
+    useEffect(() => {
+        const interval = setInterval( () => {
+            callChatAPI();
+        }, 3000 );
+        return () => clearInterval(interval);
+    }, [messages])
 
 
     return (

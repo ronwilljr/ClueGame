@@ -81,13 +81,16 @@ function App() {
       headers: { 'Content-Type': 'application/json' },
       body: ''
     };
-      fetch(url + '/join?id=' + userID , joinAPI)
+      fetch(url + '/join?player=' + userID , joinAPI)
       .then(response => response.json())
       .then(data => console.log('joinAPI:',data));
   }}
 
   useEffect(() => {
+    if (joinRoom === true){
+    console.log('called Join aPI here')
     callJoinAPI()
+    }
   }, [userID])
   
   useEffect(() => {
