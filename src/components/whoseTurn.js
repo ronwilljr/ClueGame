@@ -14,10 +14,17 @@ function WhoseTurn() {
 
     WhoseTurn.whoseTurn = whoseTurn
 
+    const characterPictures = {'Miss Scarlet': '/miss_scarlet.png',
+    'Prof. Plum': '/prof_plum.png',
+    'Mrs. Peacock': '/mrs_peacock.png',
+    'Mr. Green': '/mr_green.png',
+    'Mrs. White': '/mrs_white.png',
+    'Col. Mustard': '/col_mustard.png',}
+
     return (
         <div>
             <div>{whoseTurn}'s Turn</div>
-            {/* <img  src="/player1.png" alt="current player's turn"/> */}
+            <img  src={characterPictures[whoseTurn]} alt="current player's turn"/>
       </div> 
     )
  

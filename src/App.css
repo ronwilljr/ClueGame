@@ -14,58 +14,61 @@
 }
 .whoseTurn {
   text-align: center;
-  height: 20%;
+  height: 18%;
   background-color: #ffffff;
-  border-top: 3px solid #00b8b8;
-  border-left: 3px solid #00b8b8;
-  border-right: 3px solid #00b8b8;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 .whoseTurn img{
   height: 100px;
   width: 100px;
 }
 .messages {
-  height: 75%;
-  border-top: 3px solid #00b8b8;
-  border-left: 3px solid #00b8b8;
-  border-right: 3px solid #00b8b8;
-  background-color: aqua;
+  height: 77%;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background-color: rgb(206, 187, 158);
 }
 .messagesTitle {
-  background-color: aquamarine;
+  background-color: rgb(167, 113, 51);
   text-align: center;
+  font-size: larger;
+  color: white;
   font-weight: 700;
   margin-bottom: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 3px solid #00b8b8;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid black;
 }
 .messagesBox {
-  background-color: aqua;
+  background-color: rgb(206, 187, 158);
   height: 95%;
   overflow: auto;
 }
 .messagesIndividual {
-  background-color: aquamarine;
+  background-color: peachpuff;
   margin-bottom: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
   border-top: 2px solid #ffffff;
   border-bottom: 2px solid #ffffff;
 }
-.playerCount {
+/* .playerCount {
   display:flex;
   justify-content:center;
   align-items: center;
-  background-color: white;
+  background-color: rgb(206, 187, 158);
   height: 5%;
   border: 1px solid black;
-}
+  color:rgb(53, 47, 39)
+} */
 .midCol {
   width:70%;
   display: flex;
   flex-direction: column;
-  background-color: #dcfaff;
+  /* background-color: #dcfaff; */
   justify-content: center;
 }
 .gbInnerRows {
@@ -83,18 +86,25 @@
 }
 .gbHHalls {
   background-color: lightblue; 
+  background-image: url(/public/greytile.png);
+  background-size:cover;
+  background-repeat: no-repeat;
   width: 150px;
   height: 50px;
   align-self: center;
+
 }
 .gbVHalls {
   background-color: lightblue; 
+  background-image: url(/public/greytile.png);
+  background-size:cover;
+  background-repeat: no-repeat;
   width: 50px;
   height: 150px;
   margin-left: 50px;
 }
 .gbPlayer1Start {
-  background-color: #fd7575;
+  background-color: #e92727;
   width: 50px;
   height: 50px;
   margin-top: 10px;
@@ -102,7 +112,7 @@
   text-align: center;
 }
 .gbPlayer2Start {
-  background-color: orange;
+  background-color: rgb(240, 128, 180);
   width: 50px;
   height: 50px;
   margin-top: 50px;
@@ -110,7 +120,7 @@
   text-align: center; 
 }
 .gbPlayer3Start {
-  background-color: rgb(253, 253, 176);
+  background-color: rgb(240, 186, 37);
   width: 50px;
   height: 50px;
   margin-top: 50px;
@@ -118,7 +128,7 @@
   text-align: center;
 }
 .gbPlayer4Start {
-  background-color: green;
+  background-color: rgb(23, 139, 185);
   width: 50px;
   height: 50px;
   margin-top: 50px;
@@ -126,7 +136,7 @@
   text-align: center;
 }
 .gbPlayer5Start {
-  background-color: #0099ff;
+  background-color: #09a043;
   width: 50px;
   height: 50px;
   margin-top: 0px;
@@ -134,7 +144,7 @@
   text-align: center;
 }
 .gbPlayer6Start {
-  background-color: rgb(176, 73, 250);
+  background-color: rgb(177, 177, 177);
   width: 50px;
   height: 50px;
   margin-top: 0px;
@@ -142,39 +152,42 @@
   text-align: center;
 }
 .gbRoom1 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
+  /* background-image: url(/public/billiard.png);
+  background-size:cover;
+  background-repeat: no-repeat; */
   width: 150px;
 }
 .gbRoom2 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoom3 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoom4 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoom5 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoom6 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoom7 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoom8 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoom9 {
-  background-color: lightseagreen;
+  background-color: rgb(131, 108, 78);
   width: 150px;
 }
 .gbRoomTitle {
@@ -184,6 +197,12 @@
   border-bottom: 1px solid black;
   padding-right: 2px;
 }
+
+.gbImg img{
+  height: 40px;
+  width: 30px;
+}
+
 .rightCol {
   width:15%;
   display: flex;
@@ -191,11 +210,11 @@
 }
 .myCharacter {
   text-align: center;
-  height: 20%;
+  height: 18%;
   background-color: #ffffff;
-  border-top: 3px solid #00b8b8;
-  border-left: 3px solid #00b8b8;
-  border-right: 3px solid #00b8b8;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
 }
 .myCharacter img{
   height: 100px;
@@ -243,29 +262,42 @@
   margin-right: 10px;
 }
 .myCardsTitle {
-  background-color: aquamarine;
+  background-color: rgb(167, 113, 51);
+  color: white;
   text-align: center;
   font-weight: 700;
+  font-size: larger;
   margin-bottom: 10px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  border-bottom: 3px solid #00b8b8;
+  padding-top: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid black;
 }
 .myCardsIndividual {
-  background-color: aquamarine;
+  background-color: peachpuff;
   text-align: center;
   margin-bottom: 10px;
-  padding-top: 30px;
-  padding-bottom: 30px;
-  border-top: 2px solid #ffffff;
-  border-bottom: 2px solid #ffffff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  /* width: 120px; */
+  width: 35%;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
+
+.myCardsIndividual img{
+  margin-top: 3px;
+  height: 60px;
+  width: 50px;
+}
+
 .myCards {
-  background-color: aqua;
-  height: 80%;
-  border-top: 3px solid #00b8b8;
-  border-left: 3px solid #00b8b8;
-  border-right: 3px solid #00b8b8;
+  background-color: rgb(206, 187, 158);
+  height: 81%;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  
+
 }
 .loginScreen {
   text-align: center;
@@ -280,4 +312,39 @@
 }
 .loginButton {
   margin-top: 25px;
+  margin-right: 10px;
+}
+.loginButton2 {
+  margin-top: 25px;
+  margin-left: 10px;
+}
+.threeCards {
+  width: 75px;
+  height: 105px;
+  background-color: red;
+  margin-bottom: 5px;
+}
+.threeCards img{
+  height: 100%;
+  width: 100%;
+}
+.winnerOverlay {
+  color: white;
+  font-size: 60px;
+}
+
+.show3Cards {
+  background-color: peachpuff;
+  text-align: center;
+  margin-bottom: 5px;
+  padding-top: 5px;
+  width: 75px;
+  height: 105px;
+  font-size: x-small;
+}
+
+.show3Cards img{
+  margin-top: 3px;
+  height: 75px;
+  width: 55px;
 }

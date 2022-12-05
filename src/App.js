@@ -23,6 +23,8 @@ function App() {
   const [isAdmin, setisAdmin] = useState(false);
   const [userID, setUserID] = useState('');
   const [gameStartedData, setGameStartedData] = useState([]);
+  const [activePlayers, setActivePlayers] = useState(0);
+  const [playerCountData, setPlayerCountData] = useState([]);
 
 
 
@@ -63,6 +65,14 @@ function App() {
   //   )
   // }
 
+  function loadPlayerCount() {
+    fetch(url + "/game")
+        .then((response) => response.json())
+        .then((data) => {
+          setPlayerCountData([data]);
+    });
+}
+
   function makeID() {
     var result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -92,22 +102,28 @@ function App() {
     callJoinAPI()
     }
   }, [userID])
+
   
   useEffect(() => {
       const interval = setInterval( () => {
-            if (disabled1 === true) {
-            callDetailsAPI();
-            let adminData = detailsAPIData.players
-            for (let i in adminData) {
-              if (adminData[i].id === userID & adminData[i].admin === true) {
-                setisAdmin(true)
-              }
-            }
+        loadPlayerCount()
 
-      }}, 3000 );
+        if (playerCountData !== undefined && playerCountData.length > 0) {
+          setActivePlayers(playerCountData[0][0].activePlayers.length)
+        }
+        if (disabled1 === true) {
+          callDetailsAPI();
+          let adminData = detailsAPIData.players
+          for (let i in adminData) {
+            if (adminData[i].id === userID & adminData[i].admin === true) {
+                setisAdmin(true)
+            }
+          }
+        } 
+      }, 1500 );
         return () => clearInterval(interval);
-    }, [detailsAPIData])
-    
+    }, [detailsAPIData, activePlayers, playerCountData])
+  
   
 
   function callDetailsAPI() {
@@ -138,7 +154,7 @@ useEffect(() => {
     if(joinRoom === true){
     checkIfGameStart();
     }
-  }, 3000 );
+  }, 1500 );
   return () => clearInterval(interval);
 }, [gameStartedData, joinRoom])
 
@@ -168,15 +184,15 @@ if (gameStartedData.length > 0) {
   return (
     <div className='loginScreen'>
       <div className='loginTitle'>
-        Welcome To ClueLess
+        ClueLess
       </div>
       <div className='loginSubtext'>
-        Enter A Username
+        Choose A Room
       </div>
 
       <div></div>
-      <button className = "loginButton" disabled = {disabled1} onClick={handleJoin}>Enter Room</button>
-      <button className = "loginButton" disabled = {!isAdmin} onClick={handleStart}>Start Game</button>
+      <button className = "loginButton" disabled = {disabled1} onClick={handleJoin}>Room A {activePlayers}/6</button>
+      <button className = "loginButton2" disabled = {!isAdmin} onClick={handleStart}>Start Game</button>
     </div>
     )
   }
@@ -189,10 +205,10 @@ if (gameStartedData.length > 0) {
         <div className= 'leftCol'>
           <div className= 'whoseTurn'><WhoseTurn/></div>
           <div className='messages'>
-            <div className='messagesTitle'>Messages</div>
+            <div className='messagesTitle'>Game History</div>
             <div className='messagesBox'><Messages/></div>
           </div> 
-          <div className='playerCount'>playerCount: 4</div>
+          {/* <div className='playerCount'>playerCount: 4</div> */}
         </div>
 
         <div className='midCol'><GameBoard/></div>

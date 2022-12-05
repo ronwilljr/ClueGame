@@ -1,8 +1,25 @@
 import { url } from '../URL';
 import {useState, useEffect} from 'react';
 import App from '../App';
+import ThreeCards from './threeCards';
 
 function GameBoard() {
+
+
+
+
+  const cardPictures = {'Miss Scarlet': '/miss_scarlet.png',
+  'Prof. Plum': '/prof_plum.png',
+  'Mrs. Peacock': '/mrs_peacock.png',
+  'Mr. Green': '/mr_green.png',
+  'Mrs. White': '/mrs_white.png',
+  'Col. Mustard': '/col_mustard.png',
+  'Knife': '/knife.png',
+  'Rope': '/rope.png',
+  'Candle Stick': '/candlestick.png',
+  'Revolver': '/revolver.png',
+  'Lead Pipe': '/leadpipe.png',
+  'Wrench': '/wrench.png',}
 
 
   const [boardData, setBoardData] = useState([]);
@@ -19,7 +36,7 @@ function GameBoard() {
   useEffect(() => {
       const interval = setInterval( () => {
         loadBoardData();
-      }, 3000 );
+      }, 1500 );
       return () => clearInterval(interval);
   }, [boardData])
 
@@ -187,8 +204,8 @@ function GameBoard() {
                 <div>
                   {Player_1.map((Player_1list) => {
                     return (
-                      <div key={Player_1list.key}>
-                        <div className=''>{Player_1list.user}</div>
+                      <div className='gbImg' key={Player_1list.key}>
+                        <img  src={cardPictures[Player_1list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -204,8 +221,8 @@ function GameBoard() {
               <div>
                 {Study.map((studylist) => {
                   return (
-                    <div key={studylist.key}>
-                      <div className=''>{studylist.user}</div>
+                    <div className='gbImg' key={studylist.key}>
+                      <img  src={cardPictures[studylist.user]} alt="current player's turn"/>
                     </div>
                   )})}
               </div>
@@ -215,8 +232,8 @@ function GameBoard() {
               <div>#1
                 {Hall_1.map((hall_1list) => {
                   return (
-                    <div key={hall_1list.key}>
-                      <div className=''>{hall_1list.user}</div>
+                    <div className='gbImg' key={hall_1list.key}>
+                      <img  src={cardPictures[hall_1list.user]} alt="current player's turn"/>
                     </div>
                   )})}
               </div>
@@ -226,8 +243,8 @@ function GameBoard() {
                 <div>
                   {Hall.map((halllist) => {
                     return (
-                      <div key={halllist.key}>
-                        <div className=''>{halllist.user}</div>
+                      <div className='gbImg' key={halllist.key}>
+                        <img  src={cardPictures[halllist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -236,8 +253,8 @@ function GameBoard() {
               <div>#2
                 {Hall_2.map((hall_2list) => {
                   return (
-                    <div key={hall_2list.key}>
-                      <div className=''>{hall_2list.user}</div>
+                    <div className='gbImg' key={hall_2list.key}>
+                      <img  src={cardPictures[hall_2list.user]} alt="current player's turn"/>
                     </div>
                   )})}
               </div>
@@ -247,8 +264,8 @@ function GameBoard() {
                 <div>
                   {Lounge.map((loungelist) => {
                     return (
-                      <div key={loungelist.key}>
-                        <div className=''>{loungelist.user}</div>
+                      <div className='gbImg' key={loungelist.key}>
+                        <img  src={cardPictures[loungelist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -261,8 +278,8 @@ function GameBoard() {
                 <div>
                   {Player_2.map((Player_2list) => {
                     return (
-                      <div key={Player_2list.key}>
-                        <div className=''>{Player_2list.user}</div>
+                      <div className='gbImg' key={Player_2list.key}>
+                        <img  src={cardPictures[Player_2list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -273,8 +290,8 @@ function GameBoard() {
                 <div>#3
                   {Hall_3.map((hall_3list) => {
                     return (
-                      <div key={hall_3list.key}>
-                        <div className=''>{hall_3list.user}</div>
+                      <div className='gbImg' key={hall_3list.key}>
+                        <img  src={cardPictures[hall_3list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -286,8 +303,8 @@ function GameBoard() {
                 <div>#4
                   {Hall_4.map((hall_4list) => {
                     return (
-                      <div key={hall_4list.key}>
-                        <div className=''>{hall_4list.user}</div>
+                      <div className='gbImg' key={hall_4list.key}>
+                        <img  src={cardPictures[hall_4list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -299,8 +316,8 @@ function GameBoard() {
                 <div>#5
                   {Hall_5.map((hall_5list) => {
                     return (
-                      <div key={hall_5list.key}>
-                        <div className=''>{hall_5list.user}</div>
+                      <div className='gbImg' key={hall_5list.key}>
+                        <img  src={cardPictures[hall_5list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -311,8 +328,8 @@ function GameBoard() {
                 <div>
                   {Player_3.map((Player_3list) => {
                     return (
-                      <div key={Player_3list.key}>
-                        <div className=''>{Player_3list.user}</div>
+                      <div className='gbImg' key={Player_3list.key}>
+                        <img  src={cardPictures[Player_3list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -326,8 +343,8 @@ function GameBoard() {
                 <div>
                   {Library.map((librarylist) => {
                     return (
-                      <div key={librarylist.key}>
-                        <div className=''>{librarylist.user}</div>
+                      <div className='gbImg' key={librarylist.key}>
+                        <img  src={cardPictures[librarylist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -336,8 +353,8 @@ function GameBoard() {
               <div>#6
                 {Hall_6.map((hall_6list) => {
                   return (
-                    <div key={hall_6list.key}>
-                      <div className=''>{hall_6list.user}</div>
+                    <div className='gbImg' key={hall_6list.key}>
+                      <img  src={cardPictures[hall_6list.user]} alt="current player's turn"/>
                     </div>
                   )})}
                 </div>
@@ -347,8 +364,8 @@ function GameBoard() {
                 <div>
                   {Billiard.map((billiardlist) => {
                     return (
-                      <div key={billiardlist.key}>
-                        <div className=''>{billiardlist.user}</div>
+                      <div className='gbImg' key={billiardlist.key}>
+                        <img  src={cardPictures[billiardlist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -357,8 +374,8 @@ function GameBoard() {
               <div>#7
                   {Hall_7.map((hall_7list) => {
                     return (
-                      <div key={hall_7list.key}>
-                        <div className=''>{hall_7list.user}</div>
+                      <div className='gbImg' key={hall_7list.key}>
+                        <img  src={cardPictures[hall_7list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -368,8 +385,8 @@ function GameBoard() {
                 <div>
                   {Dining.map((dininglist) => {
                     return (
-                      <div key={dininglist.key}>
-                        <div className=''>{dininglist.user}</div>
+                      <div className='gbImg' key={dininglist.key}>
+                        <img  src={cardPictures[dininglist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -382,8 +399,8 @@ function GameBoard() {
                 <div>
                   {Player_4.map((Player_4list) => {
                     return (
-                      <div key={Player_4list.key}>
-                        <div className=''>{Player_4list.user}</div>
+                      <div className='gbImg' key={Player_4list.key}>
+                        <img  src={cardPictures[Player_4list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -394,8 +411,8 @@ function GameBoard() {
                 <div>#8
                   {Hall_8.map((hall_8list) => {
                     return (
-                      <div key={hall_8list.key}>
-                        <div className=''>{hall_8list.user}</div>
+                      <div className='gbImg' key={hall_8list.key}>
+                        <img  src={cardPictures[hall_8list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -407,8 +424,8 @@ function GameBoard() {
                 <div>#9
                   {Hall_9.map((hall_9list) => {
                     return (
-                      <div key={hall_9list.key}>
-                        <div className=''>{hall_9list.user}</div>
+                      <div className='gbImg' key={hall_9list.key}>
+                        <img  src={cardPictures[hall_9list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>         
@@ -420,8 +437,8 @@ function GameBoard() {
                 <div>#10
                   {Hall_10.map((hall_10list) => {
                     return (
-                      <div key={hall_10list.key}>
-                        <div className=''>{hall_10list.user}</div>
+                      <div className='gbImg' key={hall_10list.key}>
+                        <img  src={cardPictures[hall_10list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -436,8 +453,8 @@ function GameBoard() {
                 <div>
                   {Conservatory.map((conservatorylist) => {
                     return (
-                      <div key={conservatorylist.key}>
-                        <div className=''>{conservatorylist.user}</div>
+                      <div className='gbImg' key={conservatorylist.key}>
+                        <img  src={cardPictures[conservatorylist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -446,8 +463,8 @@ function GameBoard() {
               <div>#11
                 {Hall_11.map((hall_11list) => {
                   return (
-                    <div key={hall_11list.key}>
-                      <div className=''>{hall_11list.user}</div>
+                    <div className='gbImg' key={hall_11list.key}>
+                      <img  src={cardPictures[hall_11list.user]} alt="current player's turn"/>
                     </div>
                   )})}
               </div>
@@ -457,8 +474,8 @@ function GameBoard() {
                 <div>
                   {Ballroom.map((ballroomlist) => {
                     return (
-                      <div key={ballroomlist.key}>
-                        <div className=''>{ballroomlist.user}</div>
+                      <div className='gbImg' key={ballroomlist.key}>
+                        <img  src={cardPictures[ballroomlist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -467,8 +484,8 @@ function GameBoard() {
               <div>#12
                 {Hall_12.map((hall_12list) => {
                   return (
-                    <div key={hall_12list.key}>
-                      <div className=''>{hall_12list.user}</div>
+                    <div className='gbImg' key={hall_12list.key}>
+                      <img  src={cardPictures[hall_12list.user]} alt="current player's turn"/>
                     </div>
                   )})}
               </div>
@@ -478,8 +495,8 @@ function GameBoard() {
                 <div>
                   {Kitchen.map((kitchenlist) => {
                     return (
-                      <div key={kitchenlist.key}>
-                        <div className=''>{kitchenlist.user}</div>
+                      <div className='gbImg' key={kitchenlist.key}>
+                        <img  src={cardPictures[kitchenlist.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -494,8 +511,8 @@ function GameBoard() {
                 <div>
                   {Player_5.map((Player_5list) => {
                     return (
-                      <div key={Player_5list.key}>
-                        <div className=''>{Player_5list.user}</div>
+                      <div className='gbImg' key={Player_5list.key}>
+                        <img  src={cardPictures[Player_5list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>
@@ -507,8 +524,8 @@ function GameBoard() {
                 <div>
                   {Player_6.map((Player_6list) => {
                     return (
-                      <div key={Player_6list.key}>
-                        <div className=''>{Player_6list.user}</div>
+                      <div className='gbImg' key={Player_6list.key}>
+                        <img  src={cardPictures[Player_6list.user]} alt="current player's turn"/>
                       </div>
                     )})}
                 </div>

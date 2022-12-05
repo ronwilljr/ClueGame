@@ -4,20 +4,12 @@ import { url } from "../URL";
 function Messages() {
 
     const [messages, setMessages] = useState([]);
- 
-    function loadMessages() {
-        fetch("https://www.boredapi.com/api/activity")
-            .then((response) => response.json())
-            .then((data) => {
-                setMessages([data, ...messages]);
-        });
-    }
-
 
     function callChatAPI() {
         fetch(url + '/chat')
             .then((response) => response.json())
             .then((data) => {
+                setMessages(data.reverse());
         });
       }
 
@@ -28,14 +20,15 @@ function Messages() {
         return () => clearInterval(interval);
     }, [messages])
 
-
+    var counter = 0
     return (
         <div>
             <div>
                 {messages.map((message) => {
+                    counter += 1
                     return (
-                        <div key={message.key}>
-                            <div className="messagesIndividual" >{message.activity}</div>            
+                        <div key={counter}>
+                            <div className="messagesIndividual" >{message.msg}</div>            
                         </div>
                     )
                 })}

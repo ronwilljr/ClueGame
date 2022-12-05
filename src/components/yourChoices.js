@@ -5,6 +5,7 @@ import YouAre from "./youAre";
 import WhoseTurn from "./whoseTurn";
 import GameBoard from "./gameBoard";
 import { url } from "../URL";
+import ThreeCards from "./threeCards";
 
 
 function YourChoices() {
@@ -29,8 +30,9 @@ function YourChoices() {
     const [suggestAPIResponseFlag, setSuggestAPIResponseFlag] = useState(false);
     const [accuseAPIResponseFlag, setAccuseAPIResponseFlag] = useState(false);
     const [gameIsOver, setGameIsOver] = useState(false);
-    const [bottomMessage, setBottomMessage] = useState('');
     const [isSuggestDisabled, setIsSuggestDisabled] = useState(false);
+    const [outOfGame, setOutOfGame] = useState(false);
+    const [listOfActivePlayers, setListOfActivePlayers] = useState([]);
 
     const turnType = ''
     const weaponOptions = ["Knife", "Lead Pipe", "Wrench", "Rope", "Revolver", "Candle Stick"]
@@ -53,12 +55,55 @@ function YourChoices() {
     const handleChange3 = (selectedOption) => {setSelection3(selectedOption)};
 
 
+    const [hiddenCards, setHiddenCards] = useState([]);
+   
+    function loadHiddenCards() {
+        fetch(url + "/casefile")
+            .then((response) => response.json())
+            .then((data) => {
+              setHiddenCards([data]);
+        });
+    }
+    // if (cardsLoaded === false) {
+    //     setCardsLoaded(true)
+    //     loadHiddenCards() 
+    // }
+    if (hiddenCards.length === 0) {
+        loadHiddenCards() 
+    }
+   
+    
+    
+    if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
+        if (WhoseTurn.whoseTurn === YouAre.iAM && isSuggestDisabled !== !GameBoard.sendBoardData[0][0].currentPlayer.suggest) {
+            setIsSuggestDisabled(!isSuggestDisabled)
+        }
+    }
+
     if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
         if (GameBoard.sendBoardData[0][0].active === false & gameIsOver === false) {
             setGameIsOver(true)
-            setBottomMessage('Game Over! ' + WhoseTurn.whoseTurn + ' Won!')
         }
     }
+
+
+    if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
+        if (listOfActivePlayers.length !== GameBoard.sendBoardData[0][0].activePlayers.length) {
+            let arr = []
+            for (let i in GameBoard.sendBoardData[0][0].activePlayers) {
+                let name = GameBoard.sendBoardData[0][0].activePlayers[i].name
+                arr.push(name)
+            }
+            console.log('arr',arr)
+            console.log('youare',YouAre.iAM)
+            if (!arr.includes(YouAre.iAM)) {
+                setOutOfGame(true)
+            }
+            setListOfActivePlayers(arr)
+        }
+    }
+    
+
 
     if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
         if (WhoseTurn.whoseTurn !== YouAre.iAM & playerTurn === true) {
@@ -74,11 +119,26 @@ function YourChoices() {
             setIsSuggestDisabled(false)
             setMoveOptions(GameBoard.sendBoardData[0][0].moveOptions)
 
-            if (hallways.includes(GameBoard.sendBoardData[0][0].currentPlayer.location.codename) & isSuggestDisabled === false) {
+            if (hallways.includes(GameBoard.sendBoardData[0][0].currentPlayer.location.codename)) {
                 setIsSuggestDisabled(true)
             }
         }
     }
+
+
+    // if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
+    //     if (WhoseTurn.whoseTurn === YouAre.iAM & playerTurn === false) {
+    //         setPlayerTurn(true)
+    //         setEndOfTurn(false)
+    //         setSubmitted(false)
+    //         setIsSuggestDisabled(false)
+    //         setMoveOptions(GameBoard.sendBoardData[0][0].moveOptions)
+
+    //         if (hallways.includes(GameBoard.sendBoardData[0][0].currentPlayer.location.codename) & isSuggestDisabled === false) {
+    //             setIsSuggestDisabled(true)
+    //         }
+    //     }
+    // }
 
 
     var usableOptions = []
@@ -417,7 +477,7 @@ function YourChoices() {
             setAccuseAPIResponseFlag(false)
         }
 
-    }, [accuseAPIResponse, bottomMessage])
+    }, [accuseAPIResponse])
 
 
     if (submitted === true & disabled5 === true) {setDisabled5(false)}
@@ -433,7 +493,8 @@ function YourChoices() {
             .then((response) => response.json());
     }
 
-    if (playerTurn === false || endOfTurn === true || gameIsOver === true) {
+    if (gameIsOver === true || playerTurn === false || endOfTurn === true ) {
+        console.log('90')
         return (
             <div>
                 <div className="yourChoicesBox">
@@ -443,13 +504,31 @@ function YourChoices() {
                     <button className="submitChoice" disabled = {true} >Submit</button>
                     <button className="endTurn" onClick={handleEnd} disabled = {true}>End Turn</button>
                 </div>
-                <div>{bottomMessage}</div> 
+                <ThreeCards show = {gameIsOver} outthegame = {outOfGame} whowon = {WhoseTurn.whoseTurn}>
+            {hiddenCards}
+            </ThreeCards>
             </div>
         )
     }
 
-    else if (submitted === true & endOfTurn !== true ) {
+    else if (submitted === true & endOfTurn !== true & isSuggestDisabled === false) {
         console.log("this second")
+        return (
+            <div className="yourChoicesBox">
+            <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
+            <Select className="choice2" isDisabled = {false}  options = {options2} value = {selection2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
+            <Select className="choice3" isDisabled = {true} options = {options3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
+            <button className="submitChoice"onClick={handleClick} disabled = {false} >Submit</button>
+            <button className="endTurn" onClick={handleEnd} disabled = {true}>End Turn</button>
+            <ThreeCards show = {gameIsOver} outthegame = {outOfGame} whowon = {WhoseTurn.whoseTurn}>
+            {hiddenCards}
+            </ThreeCards>
+        </div> 
+        )
+    }
+
+    else if (submitted === true & endOfTurn !== true ) {
+        console.log("other one")
         return (
             <div className="yourChoicesBox">
             <Select className="choice1" isDisabled = {true}  placeholder = "Move" menuPlacement = "top" />
@@ -457,6 +536,9 @@ function YourChoices() {
             <Select className="choice3" isDisabled = {false} options = {options3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
             <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
             <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
+            <ThreeCards show = {gameIsOver} outthegame = {outOfGame} whowon = {WhoseTurn.whoseTurn}>
+            {hiddenCards}
+            </ThreeCards>
         </div> 
         )
     }
@@ -471,12 +553,15 @@ function YourChoices() {
                 <Select className="choice3" isDisabled = {altDisabled3} options = {altOptions3()} onChange = {handleAltChange3} placeholder = "People" menuPlacement = "top" isMulti/>
                 <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
                 <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
+                <ThreeCards show = {gameIsOver} outthegame = {outOfGame} whowon = {WhoseTurn.whoseTurn}>
+            {hiddenCards}
+            </ThreeCards>
             </div> 
         ) 
     }
 
     else if (isSuggestDisabled === true){
-
+        console.log('2344')
         return (
         
         <div className="yourChoicesBox">
@@ -485,6 +570,9 @@ function YourChoices() {
             <Select className="choice3" isDisabled = {disabled3} options = {options3} value = {selection3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
             <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
             <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
+            <ThreeCards show = {gameIsOver} outthegame = {outOfGame} whowon = {WhoseTurn.whoseTurn}>
+            {hiddenCards}
+            </ThreeCards>
         </div> 
     ) 
     } 
@@ -498,7 +586,10 @@ function YourChoices() {
             <Select className="choice2" isDisabled = {disabled2} options = {options2} value = {selection2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
             <Select className="choice3" isDisabled = {disabled3} options = {options3} value = {selection3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
             <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
-            <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
+            <button className="endTurn" onClick={handleEnd} disabled = {true}>End Turn</button>
+            <ThreeCards show = {gameIsOver} outthegame = {outOfGame} whowon = {WhoseTurn.whoseTurn}>
+            {hiddenCards}
+            </ThreeCards>
         </div> 
     ) 
     }  

@@ -18,11 +18,22 @@ function YouAre() {
     }
 
     YouAre.iAM = iAM
+
+
+    const characterPictures = {'Miss Scarlet': '/miss_scarlet.png',
+                                'Prof. Plum': '/prof_plum.png',
+                                'Mrs. Peacock': '/mrs_peacock.png',
+                                'Mr. Green': '/mr_green.png',
+                                'Mrs. White': '/mrs_white.png',
+                                'Col. Mustard': '/col_mustard.png',}
+
+
+    
     
     return (
         <div>
             <div>You are</div>
-            {/* <img  src="/player2.jpg" alt="user's character"/> */}
+            <img  src={characterPictures[iAM]} alt="user's character"/>
             <div>{iAM}</div>
       </div> 
     )

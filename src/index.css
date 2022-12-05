@@ -1,5 +1,7 @@
 body {
-  background-color: #dcfaff;
+  /* background-color: #dcfaff; */
+  background-image: url('../public/detective_room.jpg');
+  /* background-size: 800px; */
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
