@@ -1,6 +1,9 @@
 import React from 'react'
 import { useState } from 'react'
 import { url } from '../URL'
+import { url2 } from '../URL'
+import YouAre from './youAre'
+import App from "../App";
 
 const THREECARDS_STYLES = {
     position: 'fixed',
@@ -16,7 +19,7 @@ const WINNER_STYLES = {
     top: '25%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: '#000',
+    backgroundColor: 'rgba(0,255,0,.3',
     padding: '10px',
     border: 'solid white 10px',
     zIndex: 1000,
@@ -32,13 +35,23 @@ const OVERLAY_STYLES = {
 }
 const OUTOFGAME_STYLES = {
     position: 'fixed',
-    top: '3%',
+    top: '30%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: '#FF0000',
+    backgroundColor: 'rgba(255,0,0,.3',
     padding: '10px',
     color: 'white',
     fontSize: '54px',
+    zIndex: 1000,
+}
+
+const EXITGAME_STYLES = {
+    position: 'fixed',
+    top: '75%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    // backgroundColor: '#FFF',
+    padding: '10px',
     zIndex: 1000,
 }
 
@@ -71,6 +84,14 @@ export default function ThreeCards({show, children, outthegame, whowon}) {
     'Kitchen': '/kitchenroom.png',}
 
 
+    const resetGame = () => {
+        if (App.isAdmin === true) {
+        fetch(url + '/reset')
+            .then((response) => response.json())
+            .then((data) => {
+            });
+        }
+    }
 
  
 
@@ -118,6 +139,7 @@ export default function ThreeCards({show, children, outthegame, whowon}) {
     }
     else {
 
+
         return (
             <div style={OVERLAY_STYLES}>
                 <div style={WINNER_STYLES}>
@@ -139,6 +161,14 @@ export default function ThreeCards({show, children, outthegame, whowon}) {
                     <br></br>
                     <img  src={cardPictures[children[0].cards[2].name]} alt="user's character"/>
                     </div>
+                </div>
+
+                <div style={EXITGAME_STYLES}>
+                    <a href= {url2}>
+                    <button className='exitButton' onClick={resetGame}>
+                    Exit Game
+                    </button>
+                    </a>
                 </div>
             </div>
         ) 

@@ -303,7 +303,7 @@
   text-align: center;
 }
 .loginTitle {
-  font-size: 40px;
+  font-size: 60px;
   margin-top: 50px;
 }
 .loginSubtext {
@@ -311,10 +311,12 @@
   margin-top: 40px;
 }
 .loginButton {
+  font-size: larger;
   margin-top: 25px;
   margin-right: 10px;
 }
 .loginButton2 {
+  font-size: larger;
   margin-top: 25px;
   margin-left: 10px;
 }
@@ -347,4 +349,10 @@
   margin-top: 3px;
   height: 75px;
   width: 55px;
+}
+.exitButton {
+  color: white;
+  background-color: rgba(255, 129, 129, 0.671);
+  font-size: larger;
+  border-color: white;
 }

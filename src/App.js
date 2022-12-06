@@ -32,6 +32,8 @@ function App() {
                     'username': username, 
                     'character': 'CharacterExample'}
 
+  App.isAdmin = isAdmin
+
 
   // const handleChange = event => {
   //   setUsername(event.target.value);
@@ -64,6 +66,10 @@ function App() {
   //   </div>
   //   )
   // }
+
+  if (disabled1 === false && activePlayers === 6) {
+    setDisabled1(true)
+  }
 
   function loadPlayerCount() {
     fetch(url + "/game")
@@ -191,7 +197,7 @@ if (gameStartedData.length > 0) {
       </div>
 
       <div></div>
-      <button className = "loginButton" disabled = {disabled1} onClick={handleJoin}>Room A {activePlayers}/6</button>
+      <button className = "loginButton" disabled = {disabled1} onClick={handleJoin}>Room A: {activePlayers}/6</button>
       <button className = "loginButton2" disabled = {!isAdmin} onClick={handleStart}>Start Game</button>
     </div>
     )
