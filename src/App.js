@@ -8,76 +8,27 @@ import YourChoices from './components/yourChoices';
 import {useState, useEffect} from 'react';
 import { url } from './URL';
 
-// function getUsername(username){
-//   return username
-// }
-
 function App() {
   
-  const [username, setUsername] = useState('');
-  const [usernameStatus, setUsernameStatus] = useState(false);
   const [joinRoom, setJoinRoom] = useState(false);
   const [startGame, setStartGame] = useState(false);
   const [detailsAPIData, setDetailsAPIData] = useState([]);
   const [disabled1, setDisabled1] = useState(false);
   const [isAdmin, setisAdmin] = useState(false);
   const [userID, setUserID] = useState('');
-  const [gameStartedData, setGameStartedData] = useState([]);
   const [activePlayers, setActivePlayers] = useState(0);
   const [playerCountData, setPlayerCountData] = useState([]);
+  const [gameStartedData, setGameStartedData] = useState([]);
+  const [gamesData, setGamesData] = useState([]);
 
-
-
-  App.username = {  'userID': 'userIDexample', 
-                    'username': username, 
-                    'character': 'CharacterExample'}
 
   App.isAdmin = isAdmin
-
-
-  // const handleChange = event => {
-  //   setUsername(event.target.value);
-  // };
-
-  // const handleClick = () => {
-  //   if (username.length !== 0) {
-  //   setUsernameStatus(true);
-  //   }
-  // };
-
-  // if (usernameStatus === false) {
-  //   return (
-  //   <div className='loginScreen'>
-  //     <div className='loginTitle'>
-  //       Welcome To ClueLess
-  //     </div>
-  //     <div className='loginSubtext'>
-  //       Enter A Username
-  //     </div>
-  //     <input
-  //       type = "text"
-  //       id = "username"
-  //       name = "username"
-  //       onChange = {handleChange}
-  //       value = {username}
-  //     />
-  //     <div></div>
-  //     <button className = "loginButton" onClick={handleClick}>Enter Game</button>
-  //   </div>
-  //   )
-  // }
 
   if (disabled1 === false && activePlayers === 6) {
     setDisabled1(true)
   }
 
-  function loadPlayerCount() {
-    fetch(url + "/game")
-        .then((response) => response.json())
-        .then((data) => {
-          setPlayerCountData([data]);
-    });
-}
+
 
   function makeID() {
     var result           = '';
@@ -91,6 +42,7 @@ function App() {
   App.myUserID = userID
 
   function callJoinAPI() {
+    console.log('done messed up')
     if (userID !== '') {
     const joinAPI = {
       method: 'POST',
@@ -115,14 +67,16 @@ function App() {
         loadPlayerCount()
 
         if (playerCountData !== undefined && playerCountData.length > 0) {
-          setActivePlayers(playerCountData[0][0].activePlayers.length)
+          setActivePlayers(playerCountData[0].activePlayers.length)
         }
         if (disabled1 === true) {
           callDetailsAPI();
           let adminData = detailsAPIData.players
           for (let i in adminData) {
             if (adminData[i].id === userID & adminData[i].admin === true) {
+              if (activePlayers > 2) {
                 setisAdmin(true)
+              }
             }
           }
         } 
@@ -155,6 +109,14 @@ function checkIfGameStart() {
   });
 }
 
+function loadPlayerCount() {
+  fetch(url + "/game")
+      .then((response) => response.json())
+      .then((data) => {
+        setPlayerCountData(data);
+  });
+}
+
 useEffect(() => {
   const interval = setInterval( () => {
     if(joinRoom === true){
@@ -174,16 +136,13 @@ if (gameStartedData.length > 0) {
   const handleJoin = () => {
     setJoinRoom(true);
     makeID()
-    callJoinAPI()
     callDetailsAPI()
     setDisabled1(true)
   };
 
   const handleStart = () => {
-    // setStartGame(true)
     callStartAPI()
   };
-
 
 
   if (startGame === false) {
@@ -214,7 +173,6 @@ if (gameStartedData.length > 0) {
             <div className='messagesTitle'>Game History</div>
             <div className='messagesBox'><Messages/></div>
           </div> 
-          {/* <div className='playerCount'>playerCount: 4</div> */}
         </div>
 
         <div className='midCol'><GameBoard/></div>

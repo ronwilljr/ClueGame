@@ -10,7 +10,6 @@ const THREECARDS_STYLES = {
     top: '55%',
     left: '77%',
     transform: 'translate(-50%, -50%)',
-    // backgroundColor: '#FFF',
     padding: '10px',
     zIndex: 1000,
 }
@@ -50,16 +49,11 @@ const EXITGAME_STYLES = {
     top: '75%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    // backgroundColor: '#FFF',
     padding: '10px',
     zIndex: 1000,
 }
 
 export default function ThreeCards({show, children, outthegame, whowon}) {
-
-    
-    // const [cardsLoaded, setCardsLoaded] = useState(false)
-
 
     const cardPictures = {'Miss Scarlet': '/miss_scarlet.png',
     'Prof. Plum': '/prof_plum.png',
@@ -122,7 +116,6 @@ export default function ThreeCards({show, children, outthegame, whowon}) {
                     Sorry, You Are Out Of The Game
                 </div>
 
-
                 <div style={THREECARDS_STYLES}>
                     <div className='threeCards'>
                     <img  src={'./backofcard.png'} alt="user's character"/>
@@ -138,7 +131,6 @@ export default function ThreeCards({show, children, outthegame, whowon}) {
         )
     }
     else {
-
 
         return (
             <div style={OVERLAY_STYLES}>

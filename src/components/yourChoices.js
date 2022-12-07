@@ -1,6 +1,5 @@
 import Select from "react-select";
 import { useState, useEffect } from "react";
-import App from "../App";
 import YouAre from "./youAre";
 import WhoseTurn from "./whoseTurn";
 import GameBoard from "./gameBoard";
@@ -64,10 +63,7 @@ function YourChoices() {
               setHiddenCards([data]);
         });
     }
-    // if (cardsLoaded === false) {
-    //     setCardsLoaded(true)
-    //     loadHiddenCards() 
-    // }
+
     if (hiddenCards.length === 0) {
         loadHiddenCards() 
     }
@@ -125,22 +121,6 @@ function YourChoices() {
         }
     }
 
-
-    // if (GameBoard.sendBoardData !== undefined & GameBoard.sendBoardData.length > 0 ) {
-    //     if (WhoseTurn.whoseTurn === YouAre.iAM & playerTurn === false) {
-    //         setPlayerTurn(true)
-    //         setEndOfTurn(false)
-    //         setSubmitted(false)
-    //         setIsSuggestDisabled(false)
-    //         setMoveOptions(GameBoard.sendBoardData[0][0].moveOptions)
-
-    //         if (hallways.includes(GameBoard.sendBoardData[0][0].currentPlayer.location.codename) & isSuggestDisabled === false) {
-    //             setIsSuggestDisabled(true)
-    //         }
-    //     }
-    // }
-
-
     var usableOptions = []
     for (let i in moveOptions) {
         usableOptions.push({value: moveOptions[i], label: moveOptions[i]})
@@ -170,10 +150,6 @@ function YourChoices() {
         return alt3
     }
 
-
-
-
-
     const [altSelection1, setAltSelection1] = useState([]);
     const [altSelection2, setAltSelection2] = useState([]);
     const [altSelection3, setAltSelection3] = useState([]);
@@ -202,15 +178,6 @@ function YourChoices() {
     if (altOptions.locations.length === 0 & altDisabled2 === false) {setAltDisabled2(true)}
     if (altOptions.people.length === 0 & altDisabled3 === false) {setAltDisabled3(true)}
 
-
-
-    // const options1 = () => {
-    //     let locOpt = []
-    //     for (let i in locationOptions) {
-    //         locOpt.push({value: locationOptions[i], label: locationOptions[i]})
-    //     }
-    //     return locOpt
-    // }
     const options1 = () => {
         let locOpt = []
         for (let i in moveOptions) {
@@ -335,15 +302,12 @@ function YourChoices() {
                 }
             }
             
-
-            var Decision = ''
             var Location = ''
             var Weapon = ''
             var Person = ''
 
             if (tempValues.length === 1) {
-                Location = tempValues[0][1] 
-                Decision = 'Move' 
+                Location = tempValues[0][1]  
                 setChosenLocation(Location)
                 callMoveAPIFlag()
             }
@@ -351,14 +315,11 @@ function YourChoices() {
             if (tempValues.length === 2) {
     
                 Person = tempValues[0][1]
-                Weapon = tempValues[1][1] 
-                Decision = 'Suggest'  
+                Weapon = tempValues[1][1]  
                 setChosenPerson(Person)
                 setChosenWeapon(Weapon)
                 callSuggestAPIFlag()
 
-                // console.log('Suuggesting')
-                // callSuggestAPI(Person, Weapon)
             }
         
             if (tempValues.length === 3) {
@@ -366,15 +327,11 @@ function YourChoices() {
                 Location = tempValues[0][1]
                 Person = tempValues[1][1]
                 Weapon = tempValues[2][1] 
-                Decision = 'Accuse'
                 setChosenPerson(Person)
                 setChosenWeapon(Weapon)
                 setChosenLocation(Location)
                 callAccuseAPIFlag()
 
-                // setSubmitted(true)
-                // console.log('Accusing')
-                // callAccuseAPI(Person, Weapon, Location)
             }
          
         }
@@ -561,7 +518,7 @@ function YourChoices() {
     }
 
     else if (isSuggestDisabled === true){
-        console.log('2344')
+        console.log('23446')
         return (
         
         <div className="yourChoicesBox">
@@ -569,7 +526,7 @@ function YourChoices() {
             <Select className="choice2" isDisabled = {true} options = {options2} value = {selection2} onChange = {handleChange2} placeholder = "Suggest" menuPlacement = "top" isMulti/>
             <Select className="choice3" isDisabled = {disabled3} options = {options3} value = {selection3} onChange = {handleChange3} placeholder = "Accuse" menuPlacement = "top" isMulti/>
             <button className="submitChoice"onClick={handleClick} disabled = {disabled4} >Submit</button>
-            <button className="endTurn" onClick={handleEnd} disabled = {disabled5}>End Turn</button>
+            <button className="endTurn" onClick={handleEnd} disabled = {true}>End Turn</button>
             <ThreeCards show = {gameIsOver} outthegame = {outOfGame} whowon = {WhoseTurn.whoseTurn}>
             {hiddenCards}
             </ThreeCards>

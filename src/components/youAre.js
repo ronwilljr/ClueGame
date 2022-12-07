@@ -19,7 +19,6 @@ function YouAre() {
 
     YouAre.iAM = iAM
 
-
     const characterPictures = {'Miss Scarlet': '/miss_scarlet.png',
                                 'Prof. Plum': '/prof_plum.png',
                                 'Mrs. Peacock': '/mrs_peacock.png',

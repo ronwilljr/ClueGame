@@ -1,9 +1,11 @@
 import {useEffect, useState } from "react";
 import { url } from "../URL";
+import YouAre from "./youAre";
 
 function Messages() {
 
     const [messages, setMessages] = useState([]);
+    const [filteredMessages, setFilteredMessages] = useState([]);
 
     function callChatAPI() {
         fetch(url + '/chat')
@@ -16,15 +18,30 @@ function Messages() {
     useEffect(() => {
         const interval = setInterval( () => {
             callChatAPI();
+            filterMessages();
+            
         }, 3000 );
         return () => clearInterval(interval);
-    }, [messages])
+    }, [messages, filteredMessages])
+
+
+    function filterMessages() {
+        let arr = []
+
+        for (let i in messages) {
+            
+            if (messages[i].dest === 'system' || messages[i].dest === YouAre.iAM) {
+                arr.push(messages[i])
+            }
+        }
+        setFilteredMessages(arr)
+    }
 
     var counter = 0
     return (
         <div>
             <div>
-                {messages.map((message) => {
+                {filteredMessages.map((message) => {
                     counter += 1
                     return (
                         <div key={counter}>

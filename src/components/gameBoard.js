@@ -5,9 +5,6 @@ import ThreeCards from './threeCards';
 
 function GameBoard() {
 
-
-
-
   const cardPictures = {'Miss Scarlet': '/miss_scarlet.png',
   'Prof. Plum': '/prof_plum.png',
   'Mrs. Peacock': '/mrs_peacock.png',
@@ -56,24 +53,12 @@ function GameBoard() {
     var user6Loc = boardData[0][0].otherPlayers[4].location.codename 
     }
 
-
   var inputData = [{"user": user1, "location": user1Loc, "key":1},
   {"user": user2, "location": user2Loc, "key":2},
   {"user": user3, "location": user3Loc, "key":3},
   {"user": user4, "location": user4Loc, "key":4},
   {"user": user5, "location": user5Loc, "key":5},
   {"user": user6, "location": user6Loc, "key":6}]
-
-  // console.log(inputData)
-
-
-//   const inputData = [{"user":"Mr. Green", "location":"study", "key":1},
-//                       {"user":"Col. Mustard", "location":"hall_1","key":2},
-//                       {"user":"Miss Scarlet", "location":"ballroom","key":3},
-//                       {"user":"Mrs. White", "location":"hall_5","key":4},
-//                       {"user":"Mrs. Peacock", "location":"hall_7","key":5},
-//                       {"user":"Prof. Plum", "location":"hall_8","key":6},
-// ]
 
   const Study = []
   const Hall = []
